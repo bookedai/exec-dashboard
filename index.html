@@ -3,1080 +3,638 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BOOKED.AI — Executive Dashboard</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<title>Command Center — BOOKED.AI</title>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --bg:       #0a0a0f;
-    --bg2:      #0f0f18;
-    --bg3:      #13131e;
-    --cyan:     #00f0ff;
-    --magenta:  #ff00e5;
-    --green:    #00ff88;
-    --amber:    #ffaa00;
-    --red:      #ff3355;
-    --glass:    rgba(255,255,255,0.04);
-    --glass2:   rgba(255,255,255,0.07);
-    --border:   rgba(255,255,255,0.08);
-    --text:     #e8e8f0;
-    --muted:    #6b6b8a;
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  /* animated background grid */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(0,240,255,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,240,255,0.03) 1px, transparent 1px);
-    background-size: 40px 40px;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  body::after {
-    content: '';
-    position: fixed;
-    top: -40%;
-    left: -20%;
-    width: 80%;
-    height: 80%;
-    background: radial-gradient(ellipse at center, rgba(0,240,255,0.04) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .container {
-    position: relative;
-    z-index: 1;
-    max-width: 1600px;
-    margin: 0 auto;
-    padding: 0 24px 60px;
-  }
-
-  /* ── HEADER ─────────────────────────────────── */
-  .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 32px 0 40px;
-    border-bottom: 1px solid var(--border);
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-
-  .logo-block { display: flex; flex-direction: column; gap: 4px; }
-
-  .logo {
-    font-size: clamp(28px, 4vw, 42px);
-    font-weight: 900;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    background: linear-gradient(135deg, var(--cyan) 0%, var(--magenta) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    filter: drop-shadow(0 0 20px rgba(0,240,255,0.5)) drop-shadow(0 0 40px rgba(255,0,229,0.3));
-    animation: logoPulse 4s ease-in-out infinite;
-  }
-
-  @keyframes logoPulse {
-    0%, 100% { filter: drop-shadow(0 0 20px rgba(0,240,255,0.5)) drop-shadow(0 0 40px rgba(255,0,229,0.3)); }
-    50% { filter: drop-shadow(0 0 30px rgba(0,240,255,0.8)) drop-shadow(0 0 60px rgba(255,0,229,0.5)); }
-  }
-
-  .subtitle {
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  .header-right { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
-
-  .live-badge {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--green);
-  }
-
-  .live-dot {
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    background: var(--green);
-    box-shadow: 0 0 8px var(--green);
-    animation: blink 2s ease-in-out infinite;
-  }
-
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-  }
-
-  .timestamp { font-size: 12px; color: var(--muted); }
-
-  /* ── GLASS CARD ──────────────────────────────── */
-  .card {
-    background: var(--glass);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 24px;
-    position: relative;
-    overflow: hidden;
-    transition: border-color 0.3s, transform 0.3s;
-  }
-
-  .card:hover {
-    border-color: rgba(0,240,255,0.2);
-    transform: translateY(-2px);
-  }
-
-  .card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(0,240,255,0.3), transparent);
-  }
-
-  .card-title {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .card-title::before {
-    content: '';
-    display: block;
-    width: 3px; height: 14px;
-    background: var(--cyan);
-    border-radius: 2px;
-    box-shadow: 0 0 8px var(--cyan);
-  }
-
-  /* ── METRICS GRID ────────────────────────────── */
-  .metrics-grid {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 16px;
-    margin: 40px 0;
-  }
-
-  @media (max-width: 1200px) { .metrics-grid { grid-template-columns: repeat(3, 1fr); } }
-  @media (max-width: 640px)  { .metrics-grid { grid-template-columns: repeat(2, 1fr); } }
-
-  .metric-card {
-    background: var(--glass);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    position: relative;
-    overflow: hidden;
-    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    animation: fadeUp 0.6s ease both;
-  }
-
-  .metric-card:nth-child(1) { animation-delay: 0.05s; }
-  .metric-card:nth-child(2) { animation-delay: 0.10s; }
-  .metric-card:nth-child(3) { animation-delay: 0.15s; }
-  .metric-card:nth-child(4) { animation-delay: 0.20s; }
-  .metric-card:nth-child(5) { animation-delay: 0.25s; }
-  .metric-card:nth-child(6) { animation-delay: 0.30s; }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .metric-card:hover { transform: translateY(-4px); }
-
-  .metric-card[data-color="cyan"]    { --mc: var(--cyan); }
-  .metric-card[data-color="magenta"] { --mc: var(--magenta); }
-  .metric-card[data-color="green"]   { --mc: var(--green); }
-  .metric-card[data-color="amber"]   { --mc: var(--amber); }
-
-  .metric-card:hover { border-color: color-mix(in srgb, var(--mc) 40%, transparent); box-shadow: 0 0 30px color-mix(in srgb, var(--mc) 10%, transparent); }
-
-  .metric-card::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--mc), transparent);
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-
-  .metric-card:hover::after { opacity: 1; }
-
-  .metric-label {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  .metric-value {
-    font-size: clamp(22px, 2.5vw, 32px);
-    font-weight: 800;
-    color: var(--mc);
-    text-shadow: 0 0 20px color-mix(in srgb, var(--mc) 60%, transparent);
-    line-height: 1;
-  }
-
-  .metric-sub {
-    font-size: 11px;
-    color: var(--muted);
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-
-  .trend-up   { color: var(--green); }
-  .trend-down { color: var(--red); }
-
-  /* ── CHARTS GRID ─────────────────────────────── */
-  .charts-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-bottom: 20px;
-  }
-
-  @media (max-width: 900px) { .charts-grid { grid-template-columns: 1fr; } }
-
-  .chart-wrap { position: relative; height: 280px; }
-
-  /* ── MAIN GRID ───────────────────────────────── */
-  .main-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 20px;
-    margin-bottom: 20px;
-  }
-
-  @media (max-width: 1100px) { .main-grid { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 700px)  { .main-grid { grid-template-columns: 1fr; } }
-
-  .span-2 { grid-column: span 2; }
-  @media (max-width: 1100px) { .span-2 { grid-column: span 1; } }
-
-  /* ── TABLE ───────────────────────────────────── */
-  .table-wrap { overflow-x: auto; max-height: 380px; overflow-y: auto; }
-
-  .table-wrap::-webkit-scrollbar { width: 4px; height: 4px; }
-  .table-wrap::-webkit-scrollbar-track { background: transparent; }
-  .table-wrap::-webkit-scrollbar-thumb { background: rgba(0,240,255,0.3); border-radius: 4px; }
-
-  table { width: 100%; border-collapse: collapse; font-size: 13px; }
-
-  th {
-    position: sticky;
-    top: 0;
-    background: rgba(10,10,15,0.9);
-    backdrop-filter: blur(10px);
-    text-align: left;
-    padding: 10px 14px;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--muted);
-    border-bottom: 1px solid var(--border);
-    white-space: nowrap;
-  }
-
-  td {
-    padding: 10px 14px;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-    white-space: nowrap;
-  }
-
-  tr:last-child td { border-bottom: none; }
-
-  tr:hover td { background: var(--glass2); }
-
-  .pos-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2px 8px;
-    border-radius: 20px;
-    font-size: 11px;
-    font-weight: 700;
-    min-width: 42px;
-  }
-
-  .pos-1 { background: rgba(0,255,136,0.15); color: var(--green); box-shadow: 0 0 8px rgba(0,255,136,0.2); }
-  .pos-good { background: rgba(0,240,255,0.12); color: var(--cyan); }
-  .pos-mid { background: rgba(255,170,0,0.12); color: var(--amber); }
-  .pos-low { background: rgba(255,51,85,0.12); color: var(--red); }
-
-  .ctr-high { color: var(--green); font-weight: 700; }
-  .ctr-mid  { color: var(--amber); }
-  .ctr-low  { color: var(--muted); }
-
-  /* ── BAR CHART GLOBAL ────────────────────────── */
-  .bar-list { display: flex; flex-direction: column; gap: 10px; }
-
-  .bar-item { display: flex; flex-direction: column; gap: 4px; }
-
-  .bar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 12px;
-  }
-
-  .bar-country { font-weight: 500; }
-  .bar-val { font-weight: 700; color: var(--cyan); }
-
-  .bar-track {
-    height: 6px;
-    background: rgba(255,255,255,0.06);
-    border-radius: 3px;
-    overflow: hidden;
-  }
-
-  .bar-fill {
-    height: 100%;
-    border-radius: 3px;
-    background: linear-gradient(90deg, var(--cyan), var(--magenta));
-    box-shadow: 0 0 6px rgba(0,240,255,0.4);
-    width: 0;
-    transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
-  }
-
-  /* ── SEO HEALTH ──────────────────────────────── */
-  .health-grid { display: flex; flex-direction: column; gap: 12px; }
-
-  .health-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 14px;
-    background: var(--glass2);
-    border-radius: 10px;
-    border: 1px solid var(--border);
-    font-size: 13px;
-    gap: 10px;
-  }
-
-  .health-label { color: var(--muted); font-size: 12px; }
-
-  .health-val { font-weight: 700; }
-
-  .status-ok   { color: var(--green); text-shadow: 0 0 8px rgba(0,255,136,0.5); }
-  .status-warn { color: var(--amber); text-shadow: 0 0 8px rgba(255,170,0,0.5); }
-  .status-bad  { color: var(--red);   text-shadow: 0 0 8px rgba(255,51,85,0.5); }
-
-  /* ── MARKET TABLE ────────────────────────────── */
-  .market-rank { font-size: 11px; color: var(--muted); font-family: monospace; }
-
-  .market-kw   { color: var(--cyan); font-weight: 600; }
-
-  .market-val  { color: var(--green); font-weight: 600; }
-
-  /* ── KANBAN ──────────────────────────────────── */
-  .kanban { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-
-  @media (max-width: 800px) { .kanban { grid-template-columns: 1fr; } }
-
-  .kanban-col { display: flex; flex-direction: column; gap: 10px; }
-
-  .kanban-header {
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    padding: 8px 14px;
-    border-radius: 8px;
-    margin-bottom: 2px;
-  }
-
-  .kanban-red     { background: rgba(255,51,85,0.12); color: var(--red); border: 1px solid rgba(255,51,85,0.25); }
-  .kanban-amber   { background: rgba(255,170,0,0.12); color: var(--amber); border: 1px solid rgba(255,170,0,0.25); }
-  .kanban-green   { background: rgba(0,255,136,0.10); color: var(--green); border: 1px solid rgba(0,255,136,0.25); }
-
-  .kanban-item {
-    background: var(--glass2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 12px 14px;
-    font-size: 12px;
-    line-height: 1.5;
-    transition: border-color 0.2s, transform 0.2s;
-  }
-
-  .kanban-item:hover { transform: translateX(4px); }
-
-  .kanban-col.col-red   .kanban-item:hover { border-color: rgba(255,51,85,0.4); }
-  .kanban-col.col-amber .kanban-item:hover { border-color: rgba(255,170,0,0.4); }
-  .kanban-col.col-green .kanban-item:hover { border-color: rgba(0,255,136,0.4); }
-
-  /* ── DEVICE + PROJECTS ROW ───────────────────── */
-  .bottom-grid {
-    display: grid;
-    grid-template-columns: 340px 1fr;
-    gap: 20px;
-    margin-top: 20px;
-  }
-
-  @media (max-width: 900px) { .bottom-grid { grid-template-columns: 1fr; } }
-
-  .donut-wrap { position: relative; height: 220px; display: flex; align-items: center; justify-content: center; }
-
-  .donut-center {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    pointer-events: none;
-  }
-
-  .donut-total { font-size: 22px; font-weight: 800; color: var(--cyan); text-shadow: 0 0 20px rgba(0,240,255,0.5); }
-  .donut-label { font-size: 10px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
-
-  .device-legend { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
-
-  .legend-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 12px;
-    gap: 10px;
-  }
-
-  .legend-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  .legend-name { flex: 1; }
-  .legend-pct { font-weight: 700; }
-
-  /* ── PROJECTS ────────────────────────────────── */
-  .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-
-  @media (max-width: 700px) { .projects-grid { grid-template-columns: 1fr; } }
-
-  .project-card {
-    background: var(--glass2);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 18px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-  }
-
-  .project-card:hover {
-    border-color: rgba(0,240,255,0.25);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 30px rgba(0,240,255,0.08);
-  }
-
-  .project-name { font-size: 14px; font-weight: 700; }
-
-  .project-meta { font-size: 11px; color: var(--muted); }
-
-  .project-status {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 3px 10px;
-    border-radius: 20px;
-    align-self: flex-start;
-  }
-
-  .status-active   { background: rgba(0,255,136,0.12); color: var(--green); border: 1px solid rgba(0,255,136,0.25); }
-  .status-audit    { background: rgba(0,240,255,0.10); color: var(--cyan); border: 1px solid rgba(0,240,255,0.25); }
-  .status-strategy { background: rgba(255,170,0,0.10); color: var(--amber); border: 1px solid rgba(255,170,0,0.25); }
-
-  /* ── SECTION SPACER ──────────────────────────── */
-  .section { margin-bottom: 20px; animation: fadeUp 0.6s ease both; }
-
-  .section:nth-child(1)  { animation-delay: 0.0s; }
-  .section:nth-child(2)  { animation-delay: 0.1s; }
-  .section:nth-child(3)  { animation-delay: 0.2s; }
-  .section:nth-child(4)  { animation-delay: 0.3s; }
-  .section:nth-child(5)  { animation-delay: 0.4s; }
-  .section:nth-child(6)  { animation-delay: 0.5s; }
-  .section:nth-child(7)  { animation-delay: 0.6s; }
-  .section:nth-child(8)  { animation-delay: 0.7s; }
-
-  /* ── FOOTER ──────────────────────────────────── */
-  .footer {
-    margin-top: 60px;
-    padding-top: 24px;
-    border-top: 1px solid var(--border);
-    text-align: center;
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-  }
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#0a0a0f;--bg2:#0d0d16;--bg3:#111120;
+  --c:#00f0ff;--m:#ff00e5;--g:#00ff88;--a:#ffaa00;--r:#ff3355;
+  --gl:rgba(255,255,255,0.04);--gl2:rgba(255,255,255,0.07);
+  --bd:rgba(255,255,255,0.08);--tx:#e8e8f0;--mu:#6b6b8a;
+  --sb:220px;
+}
+
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--bg);color:var(--tx);
+  min-height:100vh;display:flex;overflow-x:hidden;
+}
+
+/* ── GRID BG ── */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(0,240,255,0.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,240,255,0.025) 1px,transparent 1px);
+  background-size:48px 48px;
+}
+
+/* ── SIDEBAR ── */
+.sidebar{
+  width:var(--sb);flex-shrink:0;
+  background:linear-gradient(180deg,rgba(0,240,255,0.04) 0%,transparent 100%);
+  border-right:1px solid var(--bd);
+  position:fixed;top:0;left:0;height:100vh;
+  display:flex;flex-direction:column;gap:0;
+  z-index:100;overflow:hidden;
+}
+
+.sb-logo{
+  padding:28px 20px 24px;
+  border-bottom:1px solid var(--bd);
+}
+.sb-brand{
+  font-size:18px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;
+  background:linear-gradient(135deg,var(--c),var(--m));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  filter:drop-shadow(0 0 12px rgba(0,240,255,.4));
+  animation:pulse 4s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{filter:drop-shadow(0 0 12px rgba(0,240,255,.4))}50%{filter:drop-shadow(0 0 22px rgba(0,240,255,.7))}}
+.sb-tagline{font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:var(--mu);margin-top:3px;}
+
+.sb-section{padding:16px 12px 8px;font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--mu);}
+
+.nav-item{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 16px;margin:1px 8px;
+  border-radius:10px;font-size:13px;font-weight:500;
+  color:var(--mu);text-decoration:none;
+  transition:all .2s;cursor:pointer;
+  border:1px solid transparent;
+  position:relative;
+}
+.nav-item:hover{background:var(--gl2);color:var(--tx);border-color:var(--bd);}
+.nav-item.active{background:rgba(0,240,255,.08);color:var(--c);border-color:rgba(0,240,255,.2);}
+.nav-item.active::before{content:'';position:absolute;left:0;top:20%;bottom:20%;width:2px;border-radius:2px;background:var(--c);box-shadow:0 0 8px var(--c);}
+.nav-icon{font-size:14px;width:18px;text-align:center;flex-shrink:0;}
+
+.sb-status{
+  margin-top:auto;padding:16px 20px;
+  border-top:1px solid var(--bd);font-size:11px;color:var(--mu);
+}
+.sb-live{display:flex;align-items:center;gap:7px;margin-bottom:4px;color:var(--g);font-weight:600;letter-spacing:.1em;font-size:10px;text-transform:uppercase;}
+.pulse-dot{width:6px;height:6px;border-radius:50%;background:var(--g);box-shadow:0 0 6px var(--g);animation:blink 2s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+
+/* ── MAIN ── */
+.main{
+  margin-left:var(--sb);flex:1;
+  position:relative;z-index:1;
+  padding:0 28px 60px;
+  min-height:100vh;
+}
+
+/* ── HEADER ── */
+.header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:28px 0 28px;border-bottom:1px solid var(--bd);
+  flex-wrap:wrap;gap:12px;
+}
+.h-left{display:flex;flex-direction:column;gap:3px;}
+.h-title{font-size:22px;font-weight:800;letter-spacing:.05em;color:var(--tx);}
+.h-title span{color:var(--c);}
+.h-sub{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mu);}
+.h-right{display:flex;flex-direction:column;align-items:flex-end;gap:4px;}
+.clock{font-size:28px;font-weight:300;color:var(--c);text-shadow:0 0 20px rgba(0,240,255,.4);letter-spacing:.05em;font-variant-numeric:tabular-nums;}
+.date-str{font-size:11px;color:var(--mu);letter-spacing:.12em;}
+
+/* ── SECTION HEADER ── */
+.sec-head{
+  display:flex;align-items:center;gap:10px;
+  font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--mu);margin-bottom:16px;
+}
+.sec-head::before{content:'';display:block;width:3px;height:14px;border-radius:2px;background:var(--c);box-shadow:0 0 8px var(--c);}
+.sec-head.m{--c:var(--m)}
+.sec-head.g{--c:var(--g)}
+.sec-head.a{--c:var(--a)}
+
+/* ── GLASS CARD ── */
+.card{
+  background:var(--gl);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid var(--bd);border-radius:16px;padding:22px;
+  position:relative;overflow:hidden;
+  transition:border-color .25s,transform .25s,box-shadow .25s;
+}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,240,255,.25),transparent);}
+.card:hover{border-color:rgba(0,240,255,.18);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,240,255,.05);}
+
+/* ── STAT CARDS ── */
+.stats{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin:28px 0;}
+@media(max-width:1300px){.stats{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:720px){.stats{grid-template-columns:repeat(2,1fr);}}
+
+.stat{
+  background:var(--gl);border:1px solid var(--bd);border-radius:14px;
+  padding:18px;display:flex;flex-direction:column;gap:6px;
+  position:relative;overflow:hidden;
+  transition:border-color .25s,transform .25s,box-shadow .25s;
+  animation:fadeUp .5s ease both;
+}
+.stat:nth-child(1){animation-delay:.04s} .stat:nth-child(2){animation-delay:.08s}
+.stat:nth-child(3){animation-delay:.12s} .stat:nth-child(4){animation-delay:.16s}
+.stat:nth-child(5){animation-delay:.20s} .stat:nth-child(6){animation-delay:.24s}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+.stat[data-c="c"]{--ac:var(--c)} .stat[data-c="m"]{--ac:var(--m)}
+.stat[data-c="g"]{--ac:var(--g)} .stat[data-c="a"]{--ac:var(--a)}
+.stat[data-c="r"]{--ac:var(--r)}
+
+.stat::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--ac),transparent);opacity:0;transition:opacity .25s;}
+.stat:hover{border-color:color-mix(in srgb,var(--ac) 35%,transparent);box-shadow:0 0 24px color-mix(in srgb,var(--ac) 10%,transparent);transform:translateY(-3px);}
+.stat:hover::after{opacity:1;}
+
+.stat-icon{font-size:18px;margin-bottom:2px;}
+.stat-label{font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--mu);}
+.stat-val{font-size:clamp(20px,2vw,28px);font-weight:800;color:var(--ac);text-shadow:0 0 16px color-mix(in srgb,var(--ac) 50%,transparent);line-height:1;}
+.stat-delta{font-size:10px;color:var(--mu);display:flex;align-items:center;gap:3px;}
+.up{color:var(--g)} .dn{color:var(--r)}
+
+/* ── PROJECTS ── */
+.proj-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:24px;}
+@media(max-width:1400px){.proj-grid{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:800px){.proj-grid{grid-template-columns:1fr 1fr;}}
+
+.proj{
+  background:var(--gl2);border:1px solid var(--bd);border-radius:14px;
+  padding:18px;display:flex;flex-direction:column;gap:10px;
+  transition:border-color .25s,transform .25s;
+}
+.proj:hover{border-color:rgba(0,240,255,.2);transform:translateY(-2px);}
+.proj-name{font-size:13px;font-weight:700;}
+.proj-meta{font-size:10px;color:var(--mu);}
+.proj-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  padding:3px 9px;border-radius:20px;align-self:flex-start;
+}
+.b-active{background:rgba(0,255,136,.1);color:var(--g);border:1px solid rgba(0,255,136,.2);}
+.b-build {background:rgba(0,240,255,.1);color:var(--c);border:1px solid rgba(0,240,255,.2);}
+.b-review{background:rgba(255,170,0,.1);color:var(--a);border:1px solid rgba(255,170,0,.2);}
+.b-hold  {background:rgba(255,51,85,.1);color:var(--r);border:1px solid rgba(255,51,85,.2);}
+.b-plan  {background:rgba(255,0,229,.1);color:var(--m);border:1px solid rgba(255,0,229,.2);}
+
+.prog-wrap{display:flex;flex-direction:column;gap:5px;}
+.prog-row{display:flex;justify-content:space-between;font-size:10px;color:var(--mu);}
+.prog-pct{font-weight:700;color:var(--tx);}
+.bar{height:5px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;}
+.bar-f{height:100%;border-radius:3px;width:0;transition:width 1.2s cubic-bezier(.4,0,.2,1);}
+
+/* ── KANBAN ── */
+.kanban{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px;}
+@media(max-width:900px){.kanban{grid-template-columns:1fr;}}
+
+.kb-col{display:flex;flex-direction:column;gap:8px;}
+.kb-head{
+  font-size:10px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;
+  padding:8px 12px;border-radius:8px;margin-bottom:2px;
+}
+.kb-todo  {background:rgba(255,51,85,.1); color:var(--r);border:1px solid rgba(255,51,85,.2);}
+.kb-doing {background:rgba(255,170,0,.1); color:var(--a);border:1px solid rgba(255,170,0,.2);}
+.kb-done  {background:rgba(0,255,136,.08);color:var(--g);border:1px solid rgba(0,255,136,.2);}
+
+.kb-card{
+  background:var(--gl2);border:1px solid var(--bd);border-radius:10px;
+  padding:11px 13px;font-size:12px;line-height:1.5;
+  transition:transform .2s,border-color .2s;
+}
+.kb-col.todo  .kb-card:hover{transform:translateX(3px);border-color:rgba(255,51,85,.3);}
+.kb-col.doing .kb-card:hover{transform:translateX(3px);border-color:rgba(255,170,0,.3);}
+.kb-col.done  .kb-card:hover{transform:translateX(3px);border-color:rgba(0,255,136,.3);}
+
+.kb-tag{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);margin-bottom:4px;}
+.kb-assignee{margin-top:6px;font-size:10px;color:var(--mu);}
+
+/* ── BOTTOM ROW ── */
+.bottom{display:grid;grid-template-columns:1fr 340px;gap:20px;}
+@media(max-width:1100px){.bottom{grid-template-columns:1fr;}}
+
+/* ── ACTIVITY FEED ── */
+.feed{display:flex;flex-direction:column;gap:0;}
+.feed-item{
+  display:flex;gap:14px;padding:12px 0;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+  align-items:flex-start;
+  transition:background .15s;
+}
+.feed-item:last-child{border-bottom:none;}
+.feed-item:hover{background:rgba(255,255,255,.02);border-radius:8px;padding-left:8px;padding-right:8px;}
+.feed-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:4px;}
+.feed-dot.c{background:var(--c);box-shadow:0 0 6px var(--c);}
+.feed-dot.g{background:var(--g);box-shadow:0 0 6px var(--g);}
+.feed-dot.m{background:var(--m);box-shadow:0 0 6px var(--m);}
+.feed-dot.a{background:var(--a);box-shadow:0 0 6px var(--a);}
+.feed-dot.r{background:var(--r);box-shadow:0 0 6px var(--r);}
+.feed-body{flex:1;}
+.feed-msg{font-size:12px;line-height:1.5;}
+.feed-time{font-size:10px;color:var(--mu);margin-top:2px;}
+.feed-user{font-weight:600;color:var(--c);}
+
+/* ── SYSTEM STATUS ── */
+.sys-list{display:flex;flex-direction:column;gap:8px;}
+.sys-row{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 14px;background:var(--gl2);
+  border:1px solid var(--bd);border-radius:10px;
+  font-size:12px;
+  transition:border-color .2s;
+}
+.sys-row:hover{border-color:rgba(255,255,255,.12);}
+.sys-indicator{
+  width:10px;height:10px;border-radius:50%;flex-shrink:0;
+}
+.sys-indicator.ok {background:var(--g);box-shadow:0 0 8px var(--g);animation:blink 3s ease-in-out infinite;}
+.sys-indicator.warn{background:var(--a);box-shadow:0 0 8px var(--a);animation:blink 1.5s ease-in-out infinite;}
+.sys-indicator.err {background:var(--r);box-shadow:0 0 8px var(--r);animation:blink 1s ease-in-out infinite;}
+.sys-name{flex:1;font-weight:500;}
+.sys-ping{font-size:10px;color:var(--mu);font-variant-numeric:tabular-nums;}
+.sys-badge{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border-radius:20px;}
+.sys-badge.ok  {background:rgba(0,255,136,.1);color:var(--g);}
+.sys-badge.warn{background:rgba(255,170,0,.1);color:var(--a);}
+.sys-badge.err {background:rgba(255,51,85,.1);color:var(--r);}
+
+/* ── FOOTER ── */
+.foot{margin-top:48px;padding-top:20px;border-top:1px solid var(--bd);text-align:center;font-size:10px;color:var(--mu);letter-spacing:.1em;}
 </style>
 </head>
 <body>
-<div class="container">
 
-  <!-- ── HEADER ─────────────────────────── -->
+<!-- ── SIDEBAR ── -->
+<nav class="sidebar">
+  <div class="sb-logo">
+    <div class="sb-brand">BOOKED.AI</div>
+    <div class="sb-tagline">Command Center</div>
+  </div>
+
+  <div class="sb-section">Navigation</div>
+  <a class="nav-item active" href="index.html">
+    <span class="nav-icon">⌘</span> Command Center
+  </a>
+  <a class="nav-item" href="seo.html">
+    <span class="nav-icon">📈</span> SEO Dashboard
+  </a>
+  <a class="nav-item" href="#projects">
+    <span class="nav-icon">◈</span> Projects
+  </a>
+  <a class="nav-item" href="#kanban">
+    <span class="nav-icon">▦</span> Kanban Board
+  </a>
+  <a class="nav-item" href="#activity">
+    <span class="nav-icon">◎</span> Activity Feed
+  </a>
+  <a class="nav-item" href="#system">
+    <span class="nav-icon">◉</span> System Status
+  </a>
+
+  <div class="sb-section" style="margin-top:12px;">Workspace</div>
+  <div class="nav-item">
+    <span class="nav-icon">⚙</span> Settings
+  </div>
+  <div class="nav-item">
+    <span class="nav-icon">👤</span> Team
+  </div>
+
+  <div class="sb-status">
+    <div class="sb-live"><span class="pulse-dot"></span>Live Data</div>
+    <div id="sb-time" style="font-variant-numeric:tabular-nums;font-size:11px;"></div>
+  </div>
+</nav>
+
+<!-- ── MAIN ── -->
+<main class="main">
+
+  <!-- HEADER + CLOCK -->
   <header class="header">
-    <div class="logo-block">
-      <div class="logo">BOOKED.AI</div>
-      <div class="subtitle">Executive Dashboard</div>
+    <div class="h-left">
+      <div class="h-title">Command <span>Center</span></div>
+      <div class="h-sub">BOOKED.AI · Operational Overview · Feb 2026</div>
     </div>
-    <div class="header-right">
-      <div class="live-badge"><span class="live-dot"></span>Live Data</div>
-      <div class="timestamp" id="ts">Loading…</div>
+    <div class="h-right">
+      <div class="clock" id="clock">00:00:00</div>
+      <div class="date-str" id="datestr">—</div>
     </div>
   </header>
 
-  <!-- ── KEY METRICS ────────────────────── -->
-  <div class="metrics-grid">
-    <div class="metric-card" data-color="cyan">
-      <div class="metric-label">Total Keywords</div>
-      <div class="metric-value" id="cnt-kw">0</div>
-      <div class="metric-sub">Global portfolio</div>
+  <!-- STAT CARDS -->
+  <div class="stats">
+    <div class="stat" data-c="c">
+      <div class="stat-icon">🔑</div>
+      <div class="stat-label">Total Keywords</div>
+      <div class="stat-val" id="s1">0</div>
+      <div class="stat-delta">Global portfolio</div>
     </div>
-    <div class="metric-card" data-color="green">
-      <div class="metric-label">Weekly Clicks</div>
-      <div class="metric-value" id="cnt-clicks">0</div>
-      <div class="metric-sub trend-up">▲ +27.6% wow</div>
+    <div class="stat" data-c="g">
+      <div class="stat-icon">🖱</div>
+      <div class="stat-label">Weekly Clicks</div>
+      <div class="stat-val" id="s2">0</div>
+      <div class="stat-delta up">▲ +27.6% wow</div>
     </div>
-    <div class="metric-card" data-color="magenta">
-      <div class="metric-label">Monthly Impressions</div>
-      <div class="metric-value">1.74M</div>
-      <div class="metric-sub">All markets</div>
+    <div class="stat" data-c="m">
+      <div class="stat-icon">👁</div>
+      <div class="stat-label">Monthly Impressions</div>
+      <div class="stat-val">1.74M</div>
+      <div class="stat-delta">All markets</div>
     </div>
-    <div class="metric-card" data-color="cyan">
-      <div class="metric-label">Indexed Pages</div>
-      <div class="metric-value" id="cnt-pages">0</div>
-      <div class="metric-sub trend-up">▲ GSC confirmed</div>
+    <div class="stat" data-c="c">
+      <div class="stat-icon">📄</div>
+      <div class="stat-label">Indexed Pages</div>
+      <div class="stat-val" id="s3">0</div>
+      <div class="stat-delta up">▲ GSC confirmed</div>
     </div>
-    <div class="metric-card" data-color="amber">
-      <div class="metric-label">Referring Domains</div>
-      <div class="metric-value" id="cnt-domains">0</div>
-      <div class="metric-sub">3,906 backlinks</div>
+    <div class="stat" data-c="a">
+      <div class="stat-icon">🔗</div>
+      <div class="stat-label">Referring Domains</div>
+      <div class="stat-val" id="s4">0</div>
+      <div class="stat-delta">3,906 backlinks</div>
     </div>
-    <div class="metric-card" data-color="green">
-      <div class="metric-label">Traffic Value</div>
-      <div class="metric-value">$5,571</div>
-      <div class="metric-sub">Per month</div>
-    </div>
-  </div>
-
-  <!-- ── CHARTS ─────────────────────────── -->
-  <div class="charts-grid section">
-    <div class="card">
-      <div class="card-title">Weekly Clicks Trend</div>
-      <div class="chart-wrap"><canvas id="chartClicks"></canvas></div>
-    </div>
-    <div class="card">
-      <div class="card-title">US Keyword &amp; Traffic Growth</div>
-      <div class="chart-wrap"><canvas id="chartUS"></canvas></div>
+    <div class="stat" data-c="g">
+      <div class="stat-icon">💰</div>
+      <div class="stat-label">Traffic Value</div>
+      <div class="stat-val">$5,571</div>
+      <div class="stat-delta up">▲ Per month</div>
     </div>
   </div>
 
-  <!-- ── KEYWORDS + GLOBAL ──────────────── -->
-  <div class="main-grid section">
-    <div class="card span-2">
-      <div class="card-title">Top Keywords (28 days)</div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Keyword</th>
-              <th>Position</th>
-              <th>Clicks</th>
-              <th>Impressions</th>
-              <th>CTR</th>
-            </tr>
-          </thead>
-          <tbody id="kwTable"></tbody>
-        </table>
+  <!-- PROJECTS -->
+  <section id="projects" style="margin-bottom:24px;">
+    <div class="sec-head">Active Projects</div>
+    <div class="proj-grid">
+      <div class="proj">
+        <div class="proj-name">Booked AI Website</div>
+        <div class="proj-meta">Next.js · 315K+ pages · ISR</div>
+        <div class="proj-badge b-active">● Active</div>
+        <div class="prog-wrap">
+          <div class="prog-row"><span>Overall</span><span class="prog-pct">78%</span></div>
+          <div class="bar"><div class="bar-f" data-w="78" style="background:linear-gradient(90deg,var(--g),#00cc6a);"></div></div>
+        </div>
+      </div>
+      <div class="proj">
+        <div class="proj-name">SEO Optimization</div>
+        <div class="proj-meta">Audit done · Link building</div>
+        <div class="proj-badge b-build">◎ In Progress</div>
+        <div class="prog-wrap">
+          <div class="prog-row"><span>Completion</span><span class="prog-pct">54%</span></div>
+          <div class="bar"><div class="bar-f" data-w="54" style="background:linear-gradient(90deg,var(--c),#00b8cc);"></div></div>
+        </div>
+      </div>
+      <div class="proj">
+        <div class="proj-name">Customer Acquisition</div>
+        <div class="proj-meta">Paid + organic strategy</div>
+        <div class="proj-badge b-review">◈ Strategy Phase</div>
+        <div class="prog-wrap">
+          <div class="prog-row"><span>Planning</span><span class="prog-pct">35%</span></div>
+          <div class="bar"><div class="bar-f" data-w="35" style="background:linear-gradient(90deg,var(--a),#cc8800);"></div></div>
+        </div>
+      </div>
+      <div class="proj">
+        <div class="proj-name">GSC / SEMrush API</div>
+        <div class="proj-meta">Data integrations · Live</div>
+        <div class="proj-badge b-active">● Deployed</div>
+        <div class="prog-wrap">
+          <div class="prog-row"><span>Integration</span><span class="prog-pct">100%</span></div>
+          <div class="bar"><div class="bar-f" data-w="100" style="background:linear-gradient(90deg,var(--g),var(--c));"></div></div>
+        </div>
+      </div>
+      <div class="proj">
+        <div class="proj-name">AI Booking Agent</div>
+        <div class="proj-meta">Core product · v2 build</div>
+        <div class="proj-badge b-plan">◉ Planned</div>
+        <div class="prog-wrap">
+          <div class="prog-row"><span>Roadmap</span><span class="prog-pct">20%</span></div>
+          <div class="bar"><div class="bar-f" data-w="20" style="background:linear-gradient(90deg,var(--m),#cc00b8);"></div></div>
+        </div>
       </div>
     </div>
+  </section>
 
-    <div class="card">
-      <div class="card-title">Global Presence</div>
-      <div class="bar-list" id="countryBars"></div>
-    </div>
-  </div>
-
-  <!-- ── MARKET + SEO HEALTH ────────────── -->
-  <div class="main-grid section">
-    <div class="card span-2">
-      <div class="card-title">Market Breakdown</div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Market</th>
-              <th>Rank</th>
-              <th>Keywords</th>
-              <th>Traffic</th>
-              <th>Value</th>
-            </tr>
-          </thead>
-          <tbody id="marketTable"></tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">SEO Health</div>
-      <div class="health-grid" id="seoHealth"></div>
-    </div>
-  </div>
-
-  <!-- ── ISSUES & ACTIONS ───────────────── -->
-  <div class="card section">
-    <div class="card-title">Issues &amp; Actions</div>
+  <!-- KANBAN -->
+  <section id="kanban" style="margin-bottom:24px;">
+    <div class="sec-head m">Kanban Board</div>
     <div class="kanban">
-      <div class="kanban-col col-red">
-        <div class="kanban-header kanban-red">🔴 Critical</div>
-        <div class="kanban-item">Homepage is client-rendered — hurts crawlability &amp; indexing</div>
-        <div class="kanban-item">www / non-www splitting domain authority</div>
-        <div class="kanban-item">Flight pages force-dynamic with no caching layer</div>
+      <div class="kb-col todo">
+        <div class="kb-head kb-todo">▸ To Do</div>
+        <div class="kb-card">
+          <div class="kb-tag">Critical</div>
+          Homepage is client-rendered — hurts crawlability &amp; indexing
+          <div class="kb-assignee">→ Engineering</div>
+        </div>
+        <div class="kb-card">
+          <div class="kb-tag">Critical</div>
+          www / non-www splitting domain authority
+          <div class="kb-assignee">→ DevOps</div>
+        </div>
+        <div class="kb-card">
+          <div class="kb-tag">High</div>
+          Flight pages force-dynamic with no caching layer
+          <div class="kb-assignee">→ Engineering</div>
+        </div>
       </div>
-      <div class="kanban-col col-amber">
-        <div class="kanban-header kanban-amber">🟡 Quick Wins</div>
-        <div class="kanban-item">Add FAQPage schema markup to city blog posts</div>
-        <div class="kanban-item">Fix preconnect hints (staging URLs → prod)</div>
-        <div class="kanban-item">Keyword-optimize meta descriptions across top pages</div>
+      <div class="kb-col doing">
+        <div class="kb-head kb-doing">▷ In Progress</div>
+        <div class="kb-card">
+          <div class="kb-tag">Quick Win</div>
+          Add FAQPage schema to city blog posts
+          <div class="kb-assignee">→ Content Team</div>
+        </div>
+        <div class="kb-card">
+          <div class="kb-tag">Quick Win</div>
+          Fix preconnect hints (staging → prod URLs)
+          <div class="kb-assignee">→ DevOps</div>
+        </div>
+        <div class="kb-card">
+          <div class="kb-tag">SEO</div>
+          Keyword-optimize meta descriptions across top pages
+          <div class="kb-assignee">→ Content Team</div>
+        </div>
       </div>
-      <div class="kanban-col col-green">
-        <div class="kanban-header kanban-green">🟢 In Progress</div>
-        <div class="kanban-item">SEMrush integration ✅ Live</div>
-        <div class="kanban-item">GSC API integration ✅ Live</div>
-        <div class="kanban-item">Full codebase audit ✅ Complete</div>
+      <div class="kb-col done">
+        <div class="kb-head kb-done">✓ Done</div>
+        <div class="kb-card">
+          <div class="kb-tag">Integration</div>
+          SEMrush API integration
+          <div class="kb-assignee">✅ Deployed</div>
+        </div>
+        <div class="kb-card">
+          <div class="kb-tag">Integration</div>
+          Google Search Console API
+          <div class="kb-assignee">✅ Deployed</div>
+        </div>
+        <div class="kb-card">
+          <div class="kb-tag">Audit</div>
+          Full codebase SEO audit
+          <div class="kb-assignee">✅ Complete</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACTIVITY + SYSTEM -->
+  <div class="bottom">
+    <div class="card" id="activity">
+      <div class="sec-head g">Activity Feed</div>
+      <div class="feed">
+        <div class="feed-item">
+          <div class="feed-dot g"></div>
+          <div class="feed-body">
+            <div class="feed-msg"><span class="feed-user">GSC API</span> — Weekly clicks hit new high: <strong style="color:var(--g)">2,147</strong> (+27.6% WoW)</div>
+            <div class="feed-time">2 minutes ago</div>
+          </div>
+        </div>
+        <div class="feed-item">
+          <div class="feed-dot c"></div>
+          <div class="feed-body">
+            <div class="feed-msg"><span class="feed-user">SEMrush</span> — US keyword count reached <strong style="color:var(--c)">14,766</strong>, up from 10,827 last month</div>
+            <div class="feed-time">18 minutes ago</div>
+          </div>
+        </div>
+        <div class="feed-item">
+          <div class="feed-dot a"></div>
+          <div class="feed-body">
+            <div class="feed-msg"><span class="feed-user">Content Team</span> — FAQ schema draft submitted for 12 city blog posts</div>
+            <div class="feed-time">1 hour ago</div>
+          </div>
+        </div>
+        <div class="feed-item">
+          <div class="feed-dot m"></div>
+          <div class="feed-body">
+            <div class="feed-msg"><span class="feed-user">Engineering</span> — Deployed ISR config update to production (315K+ pages)</div>
+            <div class="feed-time">3 hours ago</div>
+          </div>
+        </div>
+        <div class="feed-item">
+          <div class="feed-dot g"></div>
+          <div class="feed-body">
+            <div class="feed-msg"><span class="feed-user">DevOps</span> — Canonical tag audit completed across AU, UK, CA markets</div>
+            <div class="feed-time">5 hours ago</div>
+          </div>
+        </div>
+        <div class="feed-item">
+          <div class="feed-dot r"></div>
+          <div class="feed-body">
+            <div class="feed-msg"><span class="feed-user">Alert</span> — CTR still below target (0.35% vs 1.0% goal) — action required</div>
+            <div class="feed-time">Yesterday, 16:42</div>
+          </div>
+        </div>
+        <div class="feed-item">
+          <div class="feed-dot c"></div>
+          <div class="feed-body">
+            <div class="feed-msg"><span class="feed-user">Analytics</span> — Referring domains reached <strong style="color:var(--c)">905</strong> with 3,906 total backlinks</div>
+            <div class="feed-time">Yesterday, 09:15</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" id="system">
+      <div class="sec-head a">System Status</div>
+      <div class="sys-list">
+        <div class="sys-row">
+          <div class="sys-indicator ok"></div>
+          <span class="sys-name">GSC API</span>
+          <span class="sys-ping">14ms</span>
+          <span class="sys-badge ok">Online</span>
+        </div>
+        <div class="sys-row">
+          <div class="sys-indicator ok"></div>
+          <span class="sys-name">SEMrush API</span>
+          <span class="sys-ping">28ms</span>
+          <span class="sys-badge ok">Online</span>
+        </div>
+        <div class="sys-row">
+          <div class="sys-indicator ok"></div>
+          <span class="sys-name">Next.js App</span>
+          <span class="sys-ping">82ms</span>
+          <span class="sys-badge ok">Online</span>
+        </div>
+        <div class="sys-row">
+          <div class="sys-indicator ok"></div>
+          <span class="sys-name">CDN / Vercel</span>
+          <span class="sys-ping">11ms</span>
+          <span class="sys-badge ok">Online</span>
+        </div>
+        <div class="sys-row">
+          <div class="sys-indicator warn"></div>
+          <span class="sys-name">ISR Cache</span>
+          <span class="sys-ping">—</span>
+          <span class="sys-badge warn">Partial</span>
+        </div>
+        <div class="sys-row">
+          <div class="sys-indicator ok"></div>
+          <span class="sys-name">Database</span>
+          <span class="sys-ping">6ms</span>
+          <span class="sys-badge ok">Online</span>
+        </div>
+        <div class="sys-row">
+          <div class="sys-indicator err"></div>
+          <span class="sys-name">www Redirect</span>
+          <span class="sys-ping">—</span>
+          <span class="sys-badge err">Issue</span>
+        </div>
+        <div class="sys-row">
+          <div class="sys-indicator ok"></div>
+          <span class="sys-name">Analytics Pipeline</span>
+          <span class="sys-ping">44ms</span>
+          <span class="sys-badge ok">Online</span>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- ── DEVICE + PROJECTS ──────────────── -->
-  <div class="bottom-grid section">
-    <div class="card">
-      <div class="card-title">Device Split</div>
-      <div class="donut-wrap">
-        <canvas id="chartDevice" style="max-width:220px;max-height:220px;"></canvas>
-        <div class="donut-center">
-          <div class="donut-total">6,014</div>
-          <div class="donut-label">clicks</div>
-        </div>
-      </div>
-      <div class="device-legend" id="deviceLegend"></div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">Active Projects</div>
-      <div class="projects-grid">
-        <div class="project-card">
-          <div class="project-name">Booked AI Website</div>
-          <div class="project-meta">Next.js · 315K+ pages · ISR</div>
-          <div class="project-status status-active">● Active</div>
-        </div>
-        <div class="project-card">
-          <div class="project-name">SEO Optimization</div>
-          <div class="project-meta">Audit complete · Link building needed</div>
-          <div class="project-status status-audit">◎ Audit Done</div>
-        </div>
-        <div class="project-card">
-          <div class="project-name">Customer Acquisition</div>
-          <div class="project-meta">Paid + organic strategy</div>
-          <div class="project-status status-strategy">◈ Strategy Phase</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <footer class="footer">
-    BOOKED.AI Executive Dashboard · Data sourced from Google Search Console &amp; SEMrush · Auto-refreshes on load
+  <footer class="foot">
+    BOOKED.AI Command Center · Data: Google Search Console + SEMrush · Auto-refresh on load
   </footer>
-</div>
+</main>
 
 <script>
-// ── TIMESTAMP ─────────────────────────────────────────
-document.getElementById('ts').textContent =
-  'Updated ' + new Date().toLocaleString('en-US', {
-    month: 'short', day: 'numeric', year: 'numeric',
-    hour: '2-digit', minute: '2-digit', timeZoneName: 'short'
-  });
+// ── CLOCK ─────────────────────────────────────────────
+function tick() {
+  const n = new Date();
+  const hms = n.toLocaleTimeString('en-US', {hour12:false,hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  const dstr = n.toLocaleDateString('en-US', {weekday:'long',month:'long',day:'numeric',year:'numeric'});
+  document.getElementById('clock').textContent = hms;
+  document.getElementById('datestr').textContent = dstr;
+  document.getElementById('sb-time').textContent = n.toLocaleTimeString('en-US', {hour:'2-digit',minute:'2-digit',hour12:true});
+}
+tick(); setInterval(tick, 1000);
 
-// ── COUNTER ANIMATION ──────────────────────────────────
-function animateCount(el, target, prefix='', suffix='', duration=1400) {
+// ── COUNTER ────────────────────────────────────────────
+function count(el, target, fmt) {
   const start = performance.now();
-  const isFloat = !Number.isInteger(target);
-  function tick(now) {
-    const p = Math.min((now - start) / duration, 1);
-    const ease = 1 - Math.pow(1 - p, 4);
-    const val = isFloat ? (target * ease).toFixed(1) : Math.floor(target * ease);
-    el.textContent = prefix + Number(val).toLocaleString() + suffix;
-    if (p < 1) requestAnimationFrame(tick);
-  }
-  requestAnimationFrame(tick);
+  (function frame(now) {
+    const p = Math.min((now - start) / 1400, 1);
+    const e = 1 - Math.pow(1 - p, 4);
+    el.textContent = fmt(Math.floor(target * e));
+    if (p < 1) requestAnimationFrame(frame);
+  })(performance.now());
 }
+const comma = n => n.toLocaleString();
+count(document.getElementById('s1'), 42374, comma);
+count(document.getElementById('s2'), 2147,  comma);
+count(document.getElementById('s3'), 108546,comma);
+count(document.getElementById('s4'), 905,   comma);
 
-animateCount(document.getElementById('cnt-kw'),      42374);
-animateCount(document.getElementById('cnt-clicks'),   2147);
-animateCount(document.getElementById('cnt-pages'),  108546);
-animateCount(document.getElementById('cnt-domains'),   905);
-
-// ── CHART DEFAULTS ─────────────────────────────────────
-Chart.defaults.color = '#6b6b8a';
-Chart.defaults.font.family = 'Inter';
-
-const CYAN    = '#00f0ff';
-const MAGENTA = '#ff00e5';
-const GREEN   = '#00ff88';
-const AMBER   = '#ffaa00';
-
-function neonLine(hex, alpha=0.15) {
-  return (ctx) => {
-    const g = ctx.chart.ctx.createLinearGradient(0, 0, 0, ctx.chart.height);
-    g.addColorStop(0, hex + Math.round(alpha*255).toString(16).padStart(2,'0'));
-    g.addColorStop(1, hex + '00');
-    return g;
-  };
-}
-
-// ── WEEKLY CLICKS CHART ────────────────────────────────
-(function() {
-  const labels = ['W43','W44','W45','W46','W47','W48','W49','W50','W51','W52','W00','W01','W02','W03','W04','W05','W06','W07'];
-  const data   = [131,968,966,967,849,886,785,930,959,615,530,1166,1007,911,989,1073,1682,2147];
-  new Chart(document.getElementById('chartClicks'), {
-    type: 'line',
-    data: {
-      labels,
-      datasets: [{
-        label: 'Clicks',
-        data,
-        borderColor: CYAN,
-        borderWidth: 2,
-        pointRadius: 3,
-        pointHoverRadius: 6,
-        pointBackgroundColor: CYAN,
-        pointBorderColor: '#0a0a0f',
-        pointBorderWidth: 2,
-        tension: 0.4,
-        fill: true,
-        backgroundColor: neonLine(CYAN, 0.18),
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      animation: { duration: 1200, easing: 'easeOutQuart' },
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          backgroundColor: 'rgba(10,10,20,0.95)',
-          borderColor: 'rgba(0,240,255,0.3)',
-          borderWidth: 1,
-          padding: 10,
-          titleColor: '#6b6b8a',
-          bodyColor: CYAN,
-          bodyFont: { weight: 700, size: 14 },
-          callbacks: { label: ctx => ' ' + ctx.parsed.y.toLocaleString() + ' clicks' }
-        }
-      },
-      scales: {
-        x: {
-          grid: { color: 'rgba(255,255,255,0.04)' },
-          ticks: { font: { size: 10 } }
-        },
-        y: {
-          grid: { color: 'rgba(255,255,255,0.04)' },
-          ticks: { font: { size: 10 }, callback: v => v >= 1000 ? (v/1000).toFixed(1)+'k' : v }
-        }
-      }
-    }
+// ── PROGRESS BARS ─────────────────────────────────────
+requestAnimationFrame(() => {
+  document.querySelectorAll('.bar-f').forEach(el => {
+    el.style.width = el.dataset.w + '%';
   });
-})();
+});
 
-// ── US KEYWORD & TRAFFIC GROWTH ────────────────────────
-(function() {
-  const labels  = ['Aug 25','Sep 25','Oct 25','Nov 25','Dec 25','Jan 26','Feb 26'];
-  const kwData  = [4914, 4950, 4901, 5090, 6859, 10827, 14766];
-  const trafData= [1405, 1639, 1272, 1213, 1787, 2428, 3164];
-  new Chart(document.getElementById('chartUS'), {
-    type: 'bar',
-    data: {
-      labels,
-      datasets: [
-        {
-          label: 'Keywords',
-          data: kwData,
-          backgroundColor: 'rgba(0,240,255,0.18)',
-          borderColor: CYAN,
-          borderWidth: 1.5,
-          borderRadius: 5,
-          yAxisID: 'y1',
-          order: 2,
-        },
-        {
-          label: 'Traffic',
-          data: trafData,
-          type: 'line',
-          borderColor: MAGENTA,
-          borderWidth: 2.5,
-          pointRadius: 4,
-          pointHoverRadius: 7,
-          pointBackgroundColor: MAGENTA,
-          pointBorderColor: '#0a0a0f',
-          pointBorderWidth: 2,
-          tension: 0.4,
-          fill: false,
-          yAxisID: 'y2',
-          order: 1,
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      animation: { duration: 1200, easing: 'easeOutQuart' },
-      plugins: {
-        legend: {
-          display: true,
-          labels: {
-            color: '#6b6b8a',
-            font: { size: 11 },
-            usePointStyle: true,
-            padding: 16,
-          }
-        },
-        tooltip: {
-          backgroundColor: 'rgba(10,10,20,0.95)',
-          borderColor: 'rgba(255,0,229,0.3)',
-          borderWidth: 1,
-          padding: 10,
-          titleColor: '#6b6b8a',
-        }
-      },
-      scales: {
-        x: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { font: { size: 10 } } },
-        y1: {
-          type: 'linear', position: 'left',
-          grid: { color: 'rgba(255,255,255,0.04)' },
-          ticks: { color: CYAN, font: { size: 10 }, callback: v => v >= 1000 ? (v/1000).toFixed(0)+'k' : v }
-        },
-        y2: {
-          type: 'linear', position: 'right',
-          grid: { drawOnChartArea: false },
-          ticks: { color: MAGENTA, font: { size: 10 }, callback: v => v >= 1000 ? (v/1000).toFixed(1)+'k' : v }
-        }
-      }
-    }
+// ── NAV SMOOTH SCROLL ─────────────────────────────────
+document.querySelectorAll('.nav-item[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) t.scrollIntoView({behavior:'smooth',block:'start'});
   });
-})();
-
-// ── KEYWORDS TABLE ─────────────────────────────────────
-(function() {
-  const kws = [
-    { kw:'booked ai',               pos:1.0,  clicks:178, impr:286,   ctr:62.2 },
-    { kw:'ai travel agent',          pos:3.4,  clicks:143, impr:2210,  ctr:6.5  },
-    { kw:'flight booking ai',        pos:4.6,  clicks:27,  impr:126,   ctr:21.4 },
-    { kw:'flight booking ai agent',  pos:2.5,  clicks:27,  impr:115,   ctr:23.5 },
-    { kw:'travel agent ai',          pos:5.5,  clicks:26,  impr:529,   ctr:4.9  },
-    { kw:'booking ai',               pos:5.5,  clicks:20,  impr:691,   ctr:2.9  },
-    { kw:'ai flight booking',        pos:7.1,  clicks:18,  impr:309,   ctr:5.8  },
-    { kw:'travel ai agent',          pos:8.1,  clicks:15,  impr:411,   ctr:3.6  },
-    { kw:'ai for flight booking',    pos:4.7,  clicks:14,  impr:175,   ctr:8.0  },
-    { kw:'ai flight finder',         pos:10.2, clicks:12,  impr:410,   ctr:2.9  },
-  ];
-
-  function posBadge(p) {
-    const cls = p <= 1 ? 'pos-1' : p <= 3 ? 'pos-good' : p <= 7 ? 'pos-mid' : 'pos-low';
-    return `<span class="pos-badge ${cls}">${p}</span>`;
-  }
-  function ctrClass(c) {
-    return c >= 20 ? 'ctr-high' : c >= 6 ? 'ctr-mid' : 'ctr-low';
-  }
-
-  const tbody = document.getElementById('kwTable');
-  tbody.innerHTML = kws.map(k => `
-    <tr>
-      <td>${k.kw}</td>
-      <td>${posBadge(k.pos)}</td>
-      <td>${k.clicks.toLocaleString()}</td>
-      <td>${k.impr.toLocaleString()}</td>
-      <td class="${ctrClass(k.ctr)}">${k.ctr}%</td>
-    </tr>
-  `).join('');
-})();
-
-// ── COUNTRY BARS ───────────────────────────────────────
-(function() {
-  const countries = [
-    { name:'🇦🇺 Australia', val:828 },
-    { name:'🇺🇸 USA',       val:654 },
-    { name:'🇬🇧 UK',        val:403 },
-    { name:'🇮🇳 India',     val:377 },
-    { name:'🇩🇪 Germany',   val:231 },
-    { name:'🇨🇦 Canada',    val:196 },
-    { name:'🇳🇱 Netherlands',val:123},
-    { name:'🇲🇾 Malaysia',  val:120 },
-    { name:'🇮🇹 Italy',     val:118 },
-    { name:'🇸🇦 Saudi Arabia',val:111},
-    { name:'🇪🇸 Spain',     val:108 },
-    { name:'🇫🇷 France',    val:107 },
-  ];
-  const max = countries[0].val;
-  const wrap = document.getElementById('countryBars');
-  wrap.innerHTML = countries.map(c => `
-    <div class="bar-item">
-      <div class="bar-header">
-        <span class="bar-country">${c.name}</span>
-        <span class="bar-val">${c.val.toLocaleString()}</span>
-      </div>
-      <div class="bar-track">
-        <div class="bar-fill" data-pct="${(c.val/max*100).toFixed(1)}"></div>
-      </div>
-    </div>
-  `).join('');
-
-  // animate bars
-  requestAnimationFrame(() => {
-    document.querySelectorAll('.bar-fill').forEach(el => {
-      el.style.width = el.dataset.pct + '%';
-    });
-  });
-})();
-
-// ── MARKET TABLE ───────────────────────────────────────
-(function() {
-  const markets = [
-    { m:'🇺🇸 US',  rank:'460,483',  kw:'14,766', traf:'3,164', val:'$2,029' },
-    { m:'🇦🇺 AU',  rank:'62,856',   kw:'7,088',  traf:'3,205', val:'$1,692' },
-    { m:'🇬🇧 UK',  rank:'214,800',  kw:'4,059',  traf:'1,547', val:'$502'   },
-    { m:'🇨🇦 CA',  rank:'203,941',  kw:'2,427',  traf:'932',   val:'$478'   },
-    { m:'🇮🇳 IN',  rank:'225,303',  kw:'960',    traf:'1,455', val:'$4'     },
-    { m:'🇩🇪 DE',  rank:'453,589',  kw:'1,145',  traf:'573',   val:'$64'    },
-    { m:'🇳🇿 NZ',  rank:'68,874',   kw:'775',    traf:'344',   val:'$54'    },
-    { m:'🇸🇬 SG',  rank:'103,357',  kw:'675',    traf:'174',   val:'$91'    },
-  ];
-  document.getElementById('marketTable').innerHTML = markets.map(m => `
-    <tr>
-      <td style="font-weight:600">${m.m}</td>
-      <td class="market-rank">#${m.rank}</td>
-      <td class="market-kw">${m.kw}</td>
-      <td>${m.traf}</td>
-      <td class="market-val">${m.val}</td>
-    </tr>
-  `).join('');
-})();
-
-// ── SEO HEALTH ─────────────────────────────────────────
-(function() {
-  const items = [
-    { label:'Indexed Pages',        val:'108,546', note:'✅', cls:'status-ok'   },
-    { label:'Not Indexed',          val:'34,893',  note:'⚠️', cls:'status-warn' },
-    { label:'Backlinks',            val:'3,906',   note:'905 domains', cls:'status-ok' },
-    { label:'Follow Ratio',         val:'71%',     note:'✅', cls:'status-ok'   },
-    { label:'CTR',                  val:'0.35%',   note:'⚠️ target 1%+', cls:'status-warn' },
-    { label:'Avg Position',         val:'12.8',    note:'→ target <10', cls:'status-warn' },
-  ];
-  document.getElementById('seoHealth').innerHTML = items.map(i => `
-    <div class="health-row">
-      <span class="health-label">${i.label}</span>
-      <span class="health-val ${i.cls}">${i.val}</span>
-      <span style="font-size:11px;color:#6b6b8a">${i.note}</span>
-    </div>
-  `).join('');
-})();
-
-// ── DEVICE DONUT ───────────────────────────────────────
-(function() {
-  const devices = [
-    { name:'Mobile',  val:3674, pct:61, color:CYAN    },
-    { name:'Desktop', val:2218, pct:37, color:MAGENTA },
-    { name:'Tablet',  val:122,  pct:2,  color:AMBER   },
-  ];
-
-  new Chart(document.getElementById('chartDevice'), {
-    type: 'doughnut',
-    data: {
-      labels: devices.map(d => d.name),
-      datasets: [{
-        data: devices.map(d => d.val),
-        backgroundColor: devices.map(d => d.color + '30'),
-        borderColor: devices.map(d => d.color),
-        borderWidth: 2,
-        hoverBorderWidth: 3,
-        hoverBackgroundColor: devices.map(d => d.color + '50'),
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      cutout: '72%',
-      animation: { duration: 1200, easing: 'easeOutQuart' },
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          backgroundColor: 'rgba(10,10,20,0.95)',
-          borderColor: 'rgba(0,240,255,0.25)',
-          borderWidth: 1,
-          padding: 10,
-          callbacks: {
-            label: ctx => ` ${ctx.label}: ${ctx.parsed.toLocaleString()} clicks (${devices[ctx.dataIndex].pct}%)`
-          }
-        }
-      }
-    }
-  });
-
-  document.getElementById('deviceLegend').innerHTML = devices.map(d => `
-    <div class="legend-row">
-      <span class="legend-dot" style="background:${d.color};box-shadow:0 0 6px ${d.color}"></span>
-      <span class="legend-name">${d.name}</span>
-      <span class="legend-pct" style="color:${d.color}">${d.val.toLocaleString()}</span>
-      <span style="font-size:11px;color:#6b6b8a">${d.pct}%</span>
-    </div>
-  `).join('');
-})();
+});
 </script>
 </body>
 </html>
