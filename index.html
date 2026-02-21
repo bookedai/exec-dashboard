@@ -260,6 +260,181 @@ body::before{
 .sys-badge.warn{background:rgba(255,170,0,.1);color:var(--a);}
 .sys-badge.err {background:rgba(255,51,85,.1);color:var(--r);}
 
+/* ── AI AGENTS COMMAND CENTRE ── */
+.agent-centre{margin:32px 0 24px;}
+
+.agent-centre-title{
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:20px;padding-bottom:14px;
+  border-bottom:1px solid var(--bd);
+}
+.agent-centre-title h2{
+  font-size:14px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
+  background:linear-gradient(135deg,var(--c),var(--m));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.agent-centre-title .ac-badge{
+  font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  padding:3px 10px;border-radius:20px;
+  background:rgba(0,240,255,.08);color:var(--c);border:1px solid rgba(0,240,255,.15);
+  animation:pulse 4s ease-in-out infinite;
+}
+
+/* ── AGENT CARDS ── */
+.agents-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-bottom:24px;}
+
+.agent-card{
+  background:linear-gradient(135deg,rgba(0,240,255,.03),rgba(255,0,229,.02));
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid var(--bd);border-radius:16px;padding:20px;
+  position:relative;overflow:hidden;
+  transition:border-color .25s,transform .25s,box-shadow .25s;
+}
+.agent-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,240,255,.3),rgba(255,0,229,.2),transparent);}
+.agent-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--c),var(--m),transparent);opacity:0;transition:opacity .3s;}
+.agent-card:hover{border-color:rgba(0,240,255,.2);transform:translateY(-2px);box-shadow:0 8px 40px rgba(0,240,255,.06);}
+.agent-card:hover::after{opacity:1;}
+
+.agent-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.agent-name{font-size:14px;font-weight:700;color:var(--tx);}
+.agent-model{font-size:10px;font-weight:600;letter-spacing:.08em;color:var(--m);background:rgba(255,0,229,.08);padding:2px 8px;border-radius:12px;border:1px solid rgba(255,0,229,.15);}
+
+.agent-status{display:flex;align-items:center;gap:6px;margin-bottom:10px;}
+.agent-status-dot{width:8px;height:8px;border-radius:50%;background:var(--g);box-shadow:0 0 8px var(--g),0 0 16px rgba(0,255,136,.3);animation:blink 2s ease-in-out infinite;}
+.agent-status-text{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--g);}
+
+.agent-resp{font-size:11px;color:var(--mu);line-height:1.6;border-top:1px solid rgba(255,255,255,.04);padding-top:10px;margin-top:2px;}
+.agent-resp strong{color:var(--tx);font-weight:600;}
+
+/* ── BACKLINK KANBAN ── */
+.bl-kanban{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px;}
+@media(max-width:900px){.bl-kanban{grid-template-columns:1fr;}}
+
+.bl-col{display:flex;flex-direction:column;gap:0;}
+.bl-col-head{
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:10px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;
+  padding:10px 14px;border-radius:10px;margin-bottom:8px;
+}
+.bl-col-head .bl-count{
+  font-size:18px;font-weight:900;letter-spacing:0;text-transform:none;
+  text-shadow:0 0 12px currentColor;
+}
+
+.bl-queued  .bl-col-head{background:rgba(0,240,255,.06);color:var(--c);border:1px solid rgba(0,240,255,.15);}
+.bl-submitted .bl-col-head{background:rgba(255,170,0,.06);color:var(--a);border:1px solid rgba(255,170,0,.15);}
+.bl-live    .bl-col-head{background:rgba(0,255,136,.06);color:var(--g);border:1px solid rgba(0,255,136,.15);}
+
+.bl-slot{
+  background:var(--gl2);border:1px solid var(--bd);border-radius:8px;
+  padding:10px 12px;font-size:11px;color:var(--mu);
+  margin-bottom:6px;transition:border-color .2s,transform .2s;
+  display:flex;align-items:center;gap:8px;
+}
+.bl-slot:hover{transform:translateX(3px);}
+.bl-queued .bl-slot:hover{border-color:rgba(0,240,255,.25);}
+.bl-submitted .bl-slot:hover{border-color:rgba(255,170,0,.25);}
+.bl-live .bl-slot:hover{border-color:rgba(0,255,136,.25);}
+
+.bl-slot-domain{font-weight:600;color:var(--tx);flex:1;}
+.bl-slot-score{font-size:9px;font-weight:700;padding:2px 6px;border-radius:10px;}
+.bl-queued .bl-slot-score{background:rgba(0,240,255,.1);color:var(--c);}
+.bl-submitted .bl-slot-score{background:rgba(255,170,0,.1);color:var(--a);}
+.bl-live .bl-slot-score{background:rgba(0,255,136,.1);color:var(--g);}
+
+/* ── DEAD LINK TABLE ── */
+.dl-table-wrap{
+  background:var(--gl);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid var(--bd);border-radius:16px;overflow:hidden;
+  margin-bottom:24px;position:relative;
+}
+.dl-table-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,0,229,.3),transparent);}
+
+.dl-table{width:100%;border-collapse:collapse;}
+.dl-table thead th{
+  font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--mu);padding:14px 16px;text-align:left;
+  border-bottom:1px solid var(--bd);
+  background:rgba(255,255,255,.02);
+}
+.dl-table tbody tr{transition:background .15s;}
+.dl-table tbody tr:hover{background:rgba(0,240,255,.03);}
+.dl-table tbody td{
+  padding:12px 16px;font-size:12px;
+  border-bottom:1px solid rgba(255,255,255,.03);
+}
+.dl-table tbody tr:last-child td{border-bottom:none;}
+
+.dl-domain{font-weight:600;color:var(--tx);}
+.dl-score{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:36px;height:22px;font-size:11px;font-weight:800;
+  border-radius:6px;
+}
+.dl-score.high{background:rgba(0,255,136,.12);color:var(--g);border:1px solid rgba(0,255,136,.2);}
+.dl-score.med {background:rgba(0,240,255,.12);color:var(--c);border:1px solid rgba(0,240,255,.2);}
+.dl-score.low {background:rgba(255,170,0,.12);color:var(--a);border:1px solid rgba(255,170,0,.2);}
+
+.dl-dead{color:var(--r);font-weight:500;font-size:11px;text-decoration:line-through;opacity:.7;}
+.dl-status-badge{
+  font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:3px 8px;border-radius:12px;
+}
+.dl-status-badge.ready{background:rgba(0,240,255,.1);color:var(--c);border:1px solid rgba(0,240,255,.2);}
+.dl-status-badge.contacted{background:rgba(255,170,0,.1);color:var(--a);border:1px solid rgba(255,170,0,.2);}
+
+/* ── DIRECTORY QUEUE ── */
+.dir-queue{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;
+  margin-bottom:16px;
+}
+
+.dir-item{
+  background:var(--gl2);border:1px solid var(--bd);border-radius:12px;
+  padding:12px 14px;display:flex;align-items:center;gap:10px;
+  transition:border-color .25s,transform .25s;
+}
+.dir-item:hover{border-color:rgba(255,170,0,.2);transform:translateY(-1px);}
+
+.dir-icon{
+  width:32px;height:32px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;flex-shrink:0;
+  background:rgba(255,170,0,.06);border:1px solid rgba(255,170,0,.12);
+}
+.dir-info{flex:1;min-width:0;}
+.dir-name{font-size:12px;font-weight:600;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.dir-meta{font-size:10px;color:var(--mu);margin-top:1px;}
+.dir-status{
+  font-size:8px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  padding:3px 7px;border-radius:10px;flex-shrink:0;
+}
+.dir-status.pending{background:rgba(255,170,0,.1);color:var(--a);border:1px solid rgba(255,170,0,.2);}
+.dir-status.submitted{background:rgba(0,240,255,.1);color:var(--c);border:1px solid rgba(0,240,255,.2);}
+.dir-status.live{background:rgba(0,255,136,.1);color:var(--g);border:1px solid rgba(0,255,136,.2);}
+
+/* Animations for agent centre */
+.agent-centre .card,
+.agent-centre .agent-card,
+.agent-centre .bl-col,
+.agent-centre .dl-table-wrap,
+.agent-centre .dir-item{animation:fadeUp .5s ease both;}
+.agent-centre .agent-card:nth-child(1){animation-delay:.05s;}
+.agent-centre .agent-card:nth-child(2){animation-delay:.1s;}
+.agent-centre .agent-card:nth-child(3){animation-delay:.15s;}
+.agent-centre .bl-col:nth-child(1){animation-delay:.08s;}
+.agent-centre .bl-col:nth-child(2){animation-delay:.12s;}
+.agent-centre .bl-col:nth-child(3){animation-delay:.16s;}
+.agent-centre .dir-item:nth-child(1){animation-delay:.02s;}
+.agent-centre .dir-item:nth-child(2){animation-delay:.04s;}
+.agent-centre .dir-item:nth-child(3){animation-delay:.06s;}
+.agent-centre .dir-item:nth-child(4){animation-delay:.08s;}
+.agent-centre .dir-item:nth-child(5){animation-delay:.10s;}
+.agent-centre .dir-item:nth-child(6){animation-delay:.12s;}
+.agent-centre .dir-item:nth-child(7){animation-delay:.14s;}
+.agent-centre .dir-item:nth-child(8){animation-delay:.16s;}
+.agent-centre .dir-item:nth-child(9){animation-delay:.18s;}
+
 /* ── FOOTER ── */
 .foot{margin-top:48px;padding-top:20px;border-top:1px solid var(--bd);text-align:center;font-size:10px;color:var(--mu);letter-spacing:.1em;}
 </style>
@@ -279,6 +454,9 @@ body::before{
   </a>
   <a class="nav-item" href="seo.html">
     <span class="nav-icon">📈</span> SEO Dashboard
+  </a>
+  <a class="nav-item" href="#agent-centre">
+    <span class="nav-icon">🤖</span> AI Agents
   </a>
   <a class="nav-item" href="#projects">
     <span class="nav-icon">◈</span> Projects
@@ -361,6 +539,199 @@ body::before{
       <div class="stat-delta up">▲ Per month</div>
     </div>
   </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- AI AGENTS COMMAND CENTRE                              -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <section id="agent-centre" class="agent-centre">
+
+    <div class="agent-centre-title">
+      <h2>AI Agents Command Centre</h2>
+      <span class="ac-badge">Live</span>
+    </div>
+
+    <!-- ── AGENTS PANEL ── -->
+    <div class="sec-head" style="--c:var(--m);">Active Agents</div>
+    <div class="agents-grid">
+      <div class="agent-card">
+        <div class="agent-header">
+          <span class="agent-name">Backlink Agent</span>
+          <span class="agent-model">Kimi K2.5</span>
+        </div>
+        <div class="agent-status">
+          <span class="agent-status-dot"></span>
+          <span class="agent-status-text">Running</span>
+        </div>
+        <div class="agent-resp">
+          <strong>Responsibility:</strong> SEMrush dead link discovery + directory submissions. Continuously scans competitor backlink profiles for broken link opportunities and auto-queues outreach.
+        </div>
+      </div>
+    </div>
+
+    <!-- ── BACKLINK ACQUISITION BOARD ── -->
+    <div class="sec-head" style="--c:var(--c);">Backlink Acquisition Board</div>
+    <div class="bl-kanban">
+      <div class="bl-col bl-queued">
+        <div class="bl-col-head">
+          <span>Queued</span>
+          <span class="bl-count">12</span>
+        </div>
+        <div class="bl-slot"><span class="bl-slot-domain">findaitools.me</span><span class="bl-slot-score">DS 79</span></div>
+        <div class="bl-slot"><span class="bl-slot-domain">topai.tools</span><span class="bl-slot-score">DS 63</span></div>
+        <div class="bl-slot"><span class="bl-slot-domain">en.wikipedia.org</span><span class="bl-slot-score">DS 51</span></div>
+        <div class="bl-slot"><span class="bl-slot-domain">producthunt.com</span><span class="bl-slot-score">DS 37</span></div>
+        <div class="bl-slot"><span class="bl-slot-domain">futurepedia.io</span><span class="bl-slot-score">DS 34</span></div>
+        <div class="bl-slot"><span class="bl-slot-domain">alternativeto.net</span><span class="bl-slot-score">DS 28</span></div>
+        <div class="bl-slot"><span class="bl-slot-domain">toolify.ai</span><span class="bl-slot-score">DS 26</span></div>
+        <div class="bl-slot"><span class="bl-slot-domain">webcatalog.io</span><span class="bl-slot-score">DS 22</span></div>
+        <div class="bl-slot"><span class="bl-slot-domain">crunchbase.com</span><span class="bl-slot-score">DS 19</span></div>
+        <div class="bl-slot"><span class="bl-slot-domain">theresanaiforthat.com</span><span class="bl-slot-score">DS 18</span></div>
+        <div class="bl-slot"><span class="bl-slot-domain">f6s.com</span><span class="bl-slot-score">DS 14</span></div>
+        <div class="bl-slot"><span class="bl-slot-domain">saasworthy.com</span><span class="bl-slot-score">DS 12</span></div>
+      </div>
+      <div class="bl-col bl-submitted">
+        <div class="bl-col-head">
+          <span>Submitted</span>
+          <span class="bl-count">3</span>
+        </div>
+        <div class="bl-slot"><span class="bl-slot-domain">g2.com</span><span class="bl-slot-score">DS 72</span></div>
+        <div class="bl-slot"><span class="bl-slot-domain">capterra.com</span><span class="bl-slot-score">DS 65</span></div>
+        <div class="bl-slot"><span class="bl-slot-domain">startupstash.com</span><span class="bl-slot-score">DS 31</span></div>
+      </div>
+      <div class="bl-col bl-live">
+        <div class="bl-col-head">
+          <span>Live</span>
+          <span class="bl-count">1</span>
+        </div>
+        <div class="bl-slot"><span class="bl-slot-domain">trustpilot.com</span><span class="bl-slot-score">DS 88</span></div>
+      </div>
+    </div>
+
+    <!-- ── DEAD LINK OPPORTUNITIES TABLE ── -->
+    <div class="sec-head" style="--c:var(--r);">Dead Link Opportunities</div>
+    <div class="dl-table-wrap">
+      <table class="dl-table">
+        <thead>
+          <tr>
+            <th>Source Domain</th>
+            <th>Domain Score</th>
+            <th>Links To (Dead)</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="dl-domain">findaitools.me</span></td>
+            <td><span class="dl-score high">79</span></td>
+            <td><span class="dl-dead">imean.ai/booking-assistant</span></td>
+            <td><span class="dl-status-badge ready">Ready to Claim</span></td>
+          </tr>
+          <tr>
+            <td><span class="dl-domain">topai.tools</span></td>
+            <td><span class="dl-score med">63</span></td>
+            <td><span class="dl-dead">imean.ai/features</span></td>
+            <td><span class="dl-status-badge ready">Ready to Claim</span></td>
+          </tr>
+          <tr>
+            <td><span class="dl-domain">en.wikipedia.org</span></td>
+            <td><span class="dl-score med">51</span></td>
+            <td><span class="dl-dead">roam.ai/travel-agent</span></td>
+            <td><span class="dl-status-badge contacted">Contacted</span></td>
+          </tr>
+          <tr>
+            <td><span class="dl-domain">producthunt.com</span></td>
+            <td><span class="dl-score low">37</span></td>
+            <td><span class="dl-dead">imean.ai/pricing</span></td>
+            <td><span class="dl-status-badge ready">Ready to Claim</span></td>
+          </tr>
+          <tr>
+            <td><span class="dl-domain">futurepedia.io</span></td>
+            <td><span class="dl-score low">34</span></td>
+            <td><span class="dl-dead">roam.ai/ai-concierge</span></td>
+            <td><span class="dl-status-badge ready">Ready to Claim</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ── DIRECTORY SUBMISSION QUEUE ── -->
+    <div class="sec-head" style="--c:var(--a);">Directory Submission Queue</div>
+    <div class="dir-queue">
+      <div class="dir-item">
+        <div class="dir-icon">🏷</div>
+        <div class="dir-info">
+          <div class="dir-name">theresanaiforthat.com</div>
+          <div class="dir-meta">AI Tool Directory</div>
+        </div>
+        <span class="dir-status pending">Pending</span>
+      </div>
+      <div class="dir-item">
+        <div class="dir-icon">⚡</div>
+        <div class="dir-info">
+          <div class="dir-name">topai.tools</div>
+          <div class="dir-meta">AI Aggregator</div>
+        </div>
+        <span class="dir-status pending">Pending</span>
+      </div>
+      <div class="dir-item">
+        <div class="dir-icon">🔄</div>
+        <div class="dir-info">
+          <div class="dir-name">alternativeto.net</div>
+          <div class="dir-meta">Software Alternatives</div>
+        </div>
+        <span class="dir-status pending">Pending</span>
+      </div>
+      <div class="dir-item">
+        <div class="dir-icon">🚀</div>
+        <div class="dir-info">
+          <div class="dir-name">producthunt.com</div>
+          <div class="dir-meta">Product Launch</div>
+        </div>
+        <span class="dir-status pending">Pending</span>
+      </div>
+      <div class="dir-item">
+        <div class="dir-icon">🔮</div>
+        <div class="dir-info">
+          <div class="dir-name">futurepedia.io</div>
+          <div class="dir-meta">AI Directory</div>
+        </div>
+        <span class="dir-status pending">Pending</span>
+      </div>
+      <div class="dir-item">
+        <div class="dir-icon">📦</div>
+        <div class="dir-info">
+          <div class="dir-name">webcatalog.io</div>
+          <div class="dir-meta">Web App Catalog</div>
+        </div>
+        <span class="dir-status pending">Pending</span>
+      </div>
+      <div class="dir-item">
+        <div class="dir-icon">🛠</div>
+        <div class="dir-info">
+          <div class="dir-name">toolify.ai</div>
+          <div class="dir-meta">AI Tool Ranking</div>
+        </div>
+        <span class="dir-status pending">Pending</span>
+      </div>
+      <div class="dir-item">
+        <div class="dir-icon">💼</div>
+        <div class="dir-info">
+          <div class="dir-name">crunchbase.com</div>
+          <div class="dir-meta">Startup Database</div>
+        </div>
+        <span class="dir-status pending">Pending</span>
+      </div>
+      <div class="dir-item">
+        <div class="dir-icon">🌐</div>
+        <div class="dir-info">
+          <div class="dir-name">f6s.com</div>
+          <div class="dir-meta">Startup Network</div>
+        </div>
+        <span class="dir-status pending">Pending</span>
+      </div>
+    </div>
+
+  </section>
 
   <!-- PROJECTS -->
   <section id="projects" style="margin-bottom:24px;">
