@@ -1,6 +1,14 @@
 {
   "dazReplies": 1,
   "dazCounterRoasts": 1,
+  "oura": {
+    "activityScore": 82,
+    "activityDay": "2026-02-22",
+    "readinessScore": 66,
+    "readinessDay": "2026-02-21",
+    "sleepScore": 65,
+    "sleepDay": "2026-02-21"
+  },
   "entries": [
     {
       "time": "2026-02-22 09:54",

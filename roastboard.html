@@ -3,62 +3,120 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Daz Roastboard</title>
+  <title>Booked AI — Roastboard</title>
   <style>
     :root {
-      --bg: #0b1020;
-      --card: #131a2e;
-      --text: #e7ecff;
-      --muted: #9fb0e0;
-      --accent: #5aa9ff;
-      --good: #31c48d;
-      --warn: #f59e0b;
-      --bad: #ef4444;
-      --border: #223055;
+      --bg-1: #eef4ff;
+      --bg-2: #f9fbff;
+      --text: #0f172a;
+      --muted: #475569;
+      --stroke: rgba(255, 255, 255, 0.65);
+      --glass: rgba(255, 255, 255, 0.52);
+      --shadow: 0 20px 50px rgba(15, 23, 42, 0.10);
+      --accent: #2563eb;
+      --good: #059669;
+      --warn: #d97706;
+      --bad: #dc2626;
     }
-    @media (prefers-color-scheme: light) {
+
+    @media (prefers-color-scheme: dark) {
       :root {
-        --bg: #f4f7ff;
-        --card: #ffffff;
-        --text: #0f172a;
-        --muted: #475569;
-        --accent: #2563eb;
-        --good: #059669;
-        --warn: #d97706;
-        --bad: #dc2626;
-        --border: #dbe3f4;
+        --bg-1: #060b16;
+        --bg-2: #0b1324;
+        --text: #e2e8f0;
+        --muted: #94a3b8;
+        --stroke: rgba(148, 163, 184, 0.20);
+        --glass: rgba(15, 23, 42, 0.55);
+        --shadow: 0 22px 60px rgba(0, 0, 0, 0.45);
+        --accent: #60a5fa;
+        --good: #34d399;
+        --warn: #fbbf24;
+        --bad: #f87171;
       }
     }
+
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      background: var(--bg);
       color: var(--text);
-      padding: 24px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background: radial-gradient(1200px 500px at 10% -10%, #93c5fd33 0%, transparent 55%),
+                  radial-gradient(900px 500px at 100% 10%, #a78bfa33 0%, transparent 60%),
+                  linear-gradient(160deg, var(--bg-1), var(--bg-2));
+      min-height: 100vh;
+      padding: 28px;
     }
-    .wrap { max-width: 980px; margin: 0 auto; }
-    h1 { margin: 0 0 4px; }
-    .sub { color: var(--muted); margin-bottom: 20px; }
-    .grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 16px; }
-    .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px; }
-    .k { color: var(--muted); font-size: 12px; }
-    .v { font-size: 24px; font-weight: 700; margin-top: 4px; }
-    table { width: 100%; border-collapse: collapse; background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); font-size: 14px; }
-    th { color: var(--muted); font-weight: 600; }
+
+    .wrap { max-width: 1100px; margin: 0 auto; }
+
+    .hero {
+      padding: 20px 22px;
+      border: 1px solid var(--stroke);
+      background: var(--glass);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      margin-bottom: 16px;
+    }
+
+    h1 { margin: 0; font-size: 30px; letter-spacing: -0.02em; }
+    .sub { margin: 8px 0 0; color: var(--muted); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+    @media (max-width: 620px) { .grid { grid-template-columns: 1fr; } }
+
+    .card {
+      border: 1px solid var(--stroke);
+      background: var(--glass);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      padding: 14px 16px;
+    }
+
+    .k { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; }
+    .v { font-size: 28px; font-weight: 700; margin-top: 5px; }
+
+    .section-title { margin: 18px 0 10px; font-size: 13px; letter-spacing: 0.06em; color: var(--muted); text-transform: uppercase; }
+
+    .table-wrap {
+      border: 1px solid var(--stroke);
+      background: var(--glass);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 10px 12px; border-bottom: 1px solid var(--stroke); text-align: left; font-size: 14px; }
+    th { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
     tr:last-child td { border-bottom: 0; }
-    .tag { font-size: 11px; border: 1px solid var(--border); padding: 2px 8px; border-radius: 999px; }
-    .manual { color: var(--warn); }
-    .cron { color: var(--accent); }
-    .mention { color: var(--good); }
+
+    .chip { display: inline-block; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--stroke); font-size: 11px; }
+    .chip.cron { color: var(--accent); }
+    .chip.manual { color: var(--warn); }
+    .yes { color: var(--good); font-weight: 600; }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <h1>🔥 Daz Roastboard</h1>
-    <div class="sub">Public accountability, with numbers. Fair by design: we track roasts <em>and</em> replies.</div>
+    <div class="hero">
+      <h1>🔥 Daz Roastboard</h1>
+      <p class="sub">Booked AI internal banter analytics — fair scorekeeping, not random chaos.</p>
+    </div>
 
+    <div class="section-title">Roast Metrics</div>
     <div class="grid">
       <div class="card"><div class="k">Total roasts</div><div class="v" id="total">0</div></div>
       <div class="card"><div class="k">Cron roasts</div><div class="v" id="cron">0</div></div>
@@ -68,17 +126,22 @@
       <div class="card"><div class="k">Roast net score</div><div class="v" id="net">0</div></div>
     </div>
 
-    <div class="card" style="margin-bottom:16px;">
-      <strong>Fairness ratio:</strong> <span id="ratio">0.00</span> roasts per reply
-      <div class="k" style="margin-top:6px;">Lower is fairer. If he replies more, ratio drops.</div>
+    <div class="section-title">Bio / Performance Overlay</div>
+    <div class="grid" style="margin-bottom: 18px;">
+      <div class="card"><div class="k">Oura Activity</div><div class="v" id="ouraActivity">—</div></div>
+      <div class="card"><div class="k">Oura Readiness</div><div class="v" id="ouraReadiness">—</div></div>
+      <div class="card"><div class="k">Oura Sleep</div><div class="v" id="ouraSleep">—</div></div>
     </div>
 
-    <table>
-      <thead>
-        <tr><th>Time (AEDT)</th><th>Type</th><th>Message</th><th>@daryl</th></tr>
-      </thead>
-      <tbody id="rows"></tbody>
-    </table>
+    <div class="section-title">Roast Feed</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Time (AEDT)</th><th>Type</th><th>Message</th><th>@daryl</th></tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
   </div>
 
   <script>
@@ -92,7 +155,6 @@
       const total = entries.length;
       const cron = entries.filter(e => e.type === 'cron').length;
       const manual = entries.filter(e => e.type === 'manual').length;
-      const ratio = replies > 0 ? (total / replies).toFixed(2) : '∞';
       const net = total - counter;
 
       document.getElementById('total').textContent = total;
@@ -101,15 +163,19 @@
       document.getElementById('replies').textContent = replies;
       document.getElementById('counter').textContent = counter;
       document.getElementById('net').textContent = net;
-      document.getElementById('ratio').textContent = ratio;
+
+      const oura = data.oura || {};
+      document.getElementById('ouraActivity').textContent = oura.activityScore ?? '—';
+      document.getElementById('ouraReadiness').textContent = oura.readinessScore ?? '—';
+      document.getElementById('ouraSleep').textContent = oura.sleepScore ?? '—';
 
       const rows = document.getElementById('rows');
-      rows.innerHTML = entries.map(e => `
+      rows.innerHTML = entries.slice().reverse().map(e => `
         <tr>
           <td>${e.time}</td>
-          <td><span class="tag ${e.type}">${e.type}</span></td>
+          <td><span class="chip ${e.type}">${e.type}</span></td>
           <td>${e.message}</td>
-          <td class="${e.mention ? 'mention' : ''}">${e.mention ? 'yes' : 'no'}</td>
+          <td class="${e.mention ? 'yes' : ''}">${e.mention ? 'yes' : 'no'}</td>
         </tr>
       `).join('');
     }
