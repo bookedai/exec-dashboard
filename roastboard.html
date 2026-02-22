@@ -64,6 +64,8 @@
       <div class="card"><div class="k">Cron roasts</div><div class="v" id="cron">0</div></div>
       <div class="card"><div class="k">Manual roasts</div><div class="v" id="manual">0</div></div>
       <div class="card"><div class="k">Daz replies spotted</div><div class="v" id="replies">0</div></div>
+      <div class="card"><div class="k">Daz counter-roasts landed</div><div class="v" id="counter">0</div></div>
+      <div class="card"><div class="k">Roast net score</div><div class="v" id="net">0</div></div>
     </div>
 
     <div class="card" style="margin-bottom:16px;">
@@ -85,16 +87,20 @@
       const data = await res.json();
       const entries = data.entries || [];
       const replies = data.dazReplies || 0;
+      const counter = data.dazCounterRoasts || 0;
 
       const total = entries.length;
       const cron = entries.filter(e => e.type === 'cron').length;
       const manual = entries.filter(e => e.type === 'manual').length;
       const ratio = replies > 0 ? (total / replies).toFixed(2) : '∞';
+      const net = total - counter;
 
       document.getElementById('total').textContent = total;
       document.getElementById('cron').textContent = cron;
       document.getElementById('manual').textContent = manual;
       document.getElementById('replies').textContent = replies;
+      document.getElementById('counter').textContent = counter;
+      document.getElementById('net').textContent = net;
       document.getElementById('ratio').textContent = ratio;
 
       const rows = document.getElementById('rows');
