@@ -31,6 +31,12 @@
       "type": "cron",
       "mention": true,
       "message": "Half-hour cron roast with real Slack user mention"
+    },
+    {
+      "time": "2026-02-22 21:59",
+      "type": "cron",
+      "mention": true,
+      "message": "Scheduled cron roast event."
     }
   ]
 }
