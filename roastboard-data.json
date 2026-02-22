@@ -1,0 +1,35 @@
+{
+  "dazReplies": 1,
+  "entries": [
+    {
+      "time": "2026-02-22 09:54",
+      "type": "manual",
+      "mention": false,
+      "message": "Morning roast sent in dev channel"
+    },
+    {
+      "time": "2026-02-22 18:31",
+      "type": "manual",
+      "mention": false,
+      "message": "Follow-up roast for non-response"
+    },
+    {
+      "time": "2026-02-22 19:28",
+      "type": "cron",
+      "mention": false,
+      "message": "Hourly roast job execution"
+    },
+    {
+      "time": "2026-02-22 19:29",
+      "type": "manual",
+      "mention": true,
+      "message": "@daryl mention test and roast"
+    },
+    {
+      "time": "2026-02-22 19:58",
+      "type": "cron",
+      "mention": true,
+      "message": "Half-hour cron roast with real Slack user mention"
+    }
+  ]
+}
