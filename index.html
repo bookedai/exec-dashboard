@@ -10,27 +10,36 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
 :root{
-  --bg:#0a0a0f;--bg2:#0d0d16;--bg3:#111120;
-  --c:#00f0ff;--m:#ff00e5;--g:#00ff88;--a:#ffaa00;--r:#ff3355;
-  --gl:rgba(255,255,255,0.04);--gl2:rgba(255,255,255,0.07);
-  --bd:rgba(255,255,255,0.08);--tx:#e8e8f0;--mu:#6b6b8a;
+  --bg:#eef4ff;--bg2:#f9fbff;--bg3:#ffffff;
+  --c:#2563eb;--m:#7c3aed;--g:#059669;--a:#d97706;--r:#dc2626;
+  --gl:rgba(255,255,255,.58);--gl2:rgba(255,255,255,.72);
+  --bd:rgba(148,163,184,.28);--tx:#0f172a;--mu:#475569;
   --sb:220px;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#060b16;--bg2:#0b1324;--bg3:#111a2d;
+    --c:#60a5fa;--m:#c084fc;--g:#34d399;--a:#fbbf24;--r:#f87171;
+    --gl:rgba(15,23,42,.45);--gl2:rgba(15,23,42,.62);
+    --bd:rgba(148,163,184,.22);--tx:#e2e8f0;--mu:#94a3b8;
+  }
 }
 
 html{scroll-behavior:smooth}
 body{
   font-family:'Inter',sans-serif;
-  background:var(--bg);color:var(--tx);
+  color:var(--tx);
   min-height:100vh;display:flex;overflow-x:hidden;
+  background:
+    radial-gradient(1200px 500px at 10% -10%, #93c5fd33 0%, transparent 55%),
+    radial-gradient(900px 500px at 100% 10%, #a78bfa22 0%, transparent 60%),
+    linear-gradient(160deg,var(--bg),var(--bg2));
 }
 
-/* ── GRID BG ── */
+/* ── SOFT BG ── */
 body::before{
   content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
-  background-image:
-    linear-gradient(rgba(0,240,255,0.025) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(0,240,255,0.025) 1px,transparent 1px);
-  background-size:48px 48px;
+  background:linear-gradient(to bottom right,rgba(255,255,255,.14),transparent 35%,rgba(255,255,255,.08));
 }
 
 /* ── SIDEBAR ── */
@@ -51,10 +60,7 @@ body::before{
   font-size:18px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;
   background:linear-gradient(135deg,var(--c),var(--m));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  filter:drop-shadow(0 0 12px rgba(0,240,255,.4));
-  animation:pulse 4s ease-in-out infinite;
 }
-@keyframes pulse{0%,100%{filter:drop-shadow(0 0 12px rgba(0,240,255,.4))}50%{filter:drop-shadow(0 0 22px rgba(0,240,255,.7))}}
 .sb-tagline{font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:var(--mu);margin-top:3px;}
 
 .sb-section{padding:16px 12px 8px;font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--mu);}
