@@ -48,25 +48,61 @@ def greeting(name, email):
     return f'Hi {first},'
 
 
-def build_body(greet, signature_html):
+def pick_variant(company: str, email: str) -> str:
+    text = f"{company or ''} {email or ''}".lower()
+    travel_keys = ['travel', 'skift', 'phocuswire', 'travelweekly', 'tourism']
+    business_keys = ['forbes', 'bloomberg', 'financial', 'afr', 'fortune', 'business']
+    if any(k in text for k in travel_keys):
+        return 'travel'
+    if any(k in text for k in business_keys):
+        return 'business'
+    return 'tech'
+
+
+def build_body(greet, signature_html, variant='tech'):
+    opener = "<p>Mennan Yelkenci here, Founder of <a href=\"https://www.booked.ai\" target=\"_blank\" rel=\"noopener noreferrer\">Booked AI</a>. Thought this might be relevant to your AI and product coverage.</p>"
+
+    if variant == 'travel':
+        middle = '''
+<p>Thought this may be relevant to travel coverage. We launched with a chat-first AI booking experience and saw strong conversation volume, but weak completion at checkout.</p>
+
+<p>So we changed the booking experience - users now type what they want once in a Google-style search bar, then complete through a familiar online booking interface.</p>
+
+<p><strong>That single shift reduced token burn and exponentially increased conversions.</strong></p>
+
+<p>The industry is currently treating “more chat” as the default answer to everything. What we’re seeing is simpler - travellers still want speed and certainty when money is on the line.</p>
+
+<p>If fit for coverage, happy to share a concise before-and-after breakdown and jump on a quick 15-minute call.</p>
+'''
+    elif variant == 'business':
+        middle = '''
+<p>Sharing this from a consumer behavior and commercial performance angle.</p>
+
+<p>We launched with a chat-first booking model and found a familiar issue in AI products: high engagement, low transaction completion. We then shifted to intent capture up front (Google-style search) and a traditional booking interface for payment and completion.</p>
+
+<p><strong>That single shift reduced token burn and exponentially increased conversions.</strong></p>
+
+<p>There’s a lot of capital being deployed on the assumption that “more chat = better product.” In our case, reducing conversational friction materially improved outcomes.</p>
+
+<p>If fit for coverage, happy to share a concise before-and-after breakdown and speak briefly this week.</p>
+'''
+    else:
+        middle = '''
+<p>We’re seeing a product trend that may be useful for AI coverage: engagement and conversion are not the same metric.</p>
+
+<p>Booked launched chat-first. Users interacted heavily, but booking completion lagged. We shifted to one-shot intent capture via a Google-style search input, with AI still behind the scenes, followed by a structured booking flow.</p>
+
+<p><strong>That single shift reduced token burn and exponentially increased conversions.</strong></p>
+
+<p>Right now, much of the market seems to assume the interface should always become “more conversational.” Our data suggests the opposite in high-intent purchase flows.</p>
+
+<p>If fit for coverage, happy to share the before-and-after product changes and key metrics.</p>
+'''
+
     return f'''<p>{greet}</p>
 
-<p>Mennan Yelkenci here, Founder of Booked AI. Thought this might be relevant to your AI and product coverage.</p>
-
-<p>When Booked first launched with a chat-first travel experience, we noticed that people were super happy to chat, but more than 95% of them dropped off before completing a booking.</p>
-
-<p>We've identified two reasons for this. First, many consumers still do not fully trust AI agents to finalise payments. Second, a long back-and-forth conversation is often a worse buying experience than a fast, familiar online booking path.</p>
-
-<p>So we've made a deliberate commercial bet from a conversion perspective by building a Google-style search bar where we let AI capture intent up front, then move users into a traditional online booking interface to complete the purchase.</p>
-
-<ul>
-  <li>That single shift reduced token burn and exponentially increased conversions.</li>
-</ul>
-
-<p>We think the lack of requirement for an LLM chat interface is useful for coverage and challenges the product trends coming to market today.</p>
-
-<p>Open to sharing a concise before-and-after breakdown and the exact product changes we made. Happy to jump on a quick 15-minute call this week.</p>
-
+{opener}
+{middle}
 <p>Kind regards,</p>
 
 <br/><br/>{signature_html}'''
@@ -118,7 +154,8 @@ def main():
     for i, c in enumerate(chosen):
         to_email = c['email'].strip().lower()
         greet = greeting(c.get('name', ''), to_email)
-        body_html = build_body(greet, signature_html)
+        variant = pick_variant(c.get('company', ''), to_email)
+        body_html = build_body(greet, signature_html, variant=variant)
         status, _ = send_email(token, env['sender'], to_email, 'info@booked.ai', SUBJECT, body_html)
         if status in (200, 202):
             c['status'] = 'Sent'
