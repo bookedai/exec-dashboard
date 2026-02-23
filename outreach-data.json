@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-24T00:10:15.217986",
+  "updatedAt": "2026-02-24T00:13:13.056537",
   "contacts": [
     {
       "name": "Unknown",
@@ -31,11 +31,11 @@
       "role": "",
       "email": "Julia_Talevski@foundryco.com",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T13:10:27Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
@@ -43,11 +43,11 @@
       "role": "",
       "email": "aaron.tilley@theinformation.com",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T13:12:23Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
