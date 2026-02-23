@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-24T05:50:05.976400",
+  "updatedAt": "2026-02-24T05:58:25.994728",
   "contacts": [
     {
       "name": "Unknown",
@@ -331,11 +331,11 @@
       "role": "",
       "email": "letters@smh.com.au",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T18:55:04Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
@@ -343,11 +343,11 @@
       "role": "",
       "email": "mahidine.mendjeli@futurenet.com",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T18:58:19Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
