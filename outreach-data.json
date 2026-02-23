@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-24T01:55:48.713335",
+  "updatedAt": "2026-02-24T02:04:27.062806",
   "contacts": [
     {
       "name": "Unknown",
@@ -163,11 +163,11 @@
       "role": "",
       "email": "cnn.tips@protonmail.com",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T15:01:53Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
@@ -175,11 +175,11 @@
       "role": "",
       "email": "editor@travelmarketreport.com",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-24T02:04:24",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
