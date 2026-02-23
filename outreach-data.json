@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-24T03:56:51.536697",
+  "updatedAt": "2026-02-24T04:12:55.560184",
   "contacts": [
     {
       "name": "Unknown",
@@ -211,11 +211,11 @@
       "role": "",
       "email": "editors@pcgamer.com",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T17:09:16Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
@@ -223,11 +223,11 @@
       "role": "",
       "email": "ekeating@smartcompany.com.au",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T17:12:49Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
