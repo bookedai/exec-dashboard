@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-24T06:20:04.925631",
+  "updatedAt": "2026-02-24T06:24:33.658531",
   "contacts": [
     {
       "name": "Unknown",
@@ -403,11 +403,11 @@
       "role": "",
       "email": "news@smh.com.au",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T19:22:05Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
@@ -415,11 +415,11 @@
       "role": "",
       "email": "news@startupdaily.net",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T19:24:27Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
