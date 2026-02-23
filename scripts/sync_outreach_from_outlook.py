@@ -105,7 +105,8 @@ def main():
     data = json.loads(OUTREACH_DATA.read_text())
     changed = sync_outreach(data, sent_items)
 
-    OUTREACH_DATA.write_text(json.dumps(data, indent=2))
+    if changed > 0:
+        OUTREACH_DATA.write_text(json.dumps(data, indent=2))
     print(f'updated_contacts={changed}')
 
 
