@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-24T00:13:13.056537",
+  "updatedAt": "2026-02-24T00:20:05.110809",
   "contacts": [
     {
       "name": "Unknown",
@@ -55,11 +55,11 @@
       "role": "",
       "email": "advertise@entrepreneur.com",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T13:20:01Z",
+      "notes": "Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
