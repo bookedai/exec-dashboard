@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-24T07:00:05.372725",
+  "updatedAt": "2026-02-24T07:02:53.647235",
   "contacts": [
     {
       "name": "Unknown",
@@ -499,11 +499,11 @@
       "role": "",
       "email": "sarah.petty@afr.com",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T20:00:23Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
@@ -511,11 +511,11 @@
       "role": "",
       "email": "smhopinion@smh.com.au",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T20:02:47Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
