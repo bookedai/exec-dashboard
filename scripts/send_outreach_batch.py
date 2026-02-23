@@ -60,11 +60,11 @@ def pick_variant(company: str, email: str) -> str:
 
 
 def build_body(greet, signature_html, variant='tech'):
-    opener = "<p>Mennan Yelkenci here, Founder of <a href=\"https://www.booked.ai\" target=\"_blank\" rel=\"noopener noreferrer\">Booked AI</a>. Thought this might be relevant to your AI and product coverage.</p>"
-
     if variant == 'travel':
-        middle = '''
-<p>Thought this may be relevant to travel coverage. We launched with a chat-first AI booking experience and saw strong conversation volume, but weak completion at checkout.</p>
+        body = '''
+<p>Mennan Yelkenci here, Founder of <a href="https://www.booked.ai" target="_blank" rel="noopener noreferrer">Booked AI</a>.</p>
+
+<p>Thought this may be relevant to your travel coverage. We launched with a chat-first AI booking experience and saw strong conversation volume, but weak completion at checkout.</p>
 
 <p>So we changed the booking experience - users now type what they want once in a Google-style search bar, then complete through a familiar online booking interface.</p>
 
@@ -75,7 +75,9 @@ def build_body(greet, signature_html, variant='tech'):
 <p>If fit for coverage, happy to share a concise before-and-after breakdown and jump on a quick 15-minute call.</p>
 '''
     elif variant == 'business':
-        middle = '''
+        body = '''
+<p>Mennan Yelkenci here, Founder of <a href="https://www.booked.ai" target="_blank" rel="noopener noreferrer">Booked AI</a>.</p>
+
 <p>Sharing this from a consumer behavior and commercial performance angle.</p>
 
 <p>We launched with a chat-first booking model and found a familiar issue in AI products: high engagement, low transaction completion. We then shifted to intent capture up front (Google-style search) and a traditional booking interface for payment and completion.</p>
@@ -87,8 +89,10 @@ def build_body(greet, signature_html, variant='tech'):
 <p>If fit for coverage, happy to share a concise before-and-after breakdown and speak briefly this week.</p>
 '''
     else:
-        middle = '''
-<p>We’re seeing a product trend that may be useful for AI coverage: engagement and conversion are not the same metric.</p>
+        body = '''
+<p>Mennan Yelkenci here, Founder of <a href="https://www.booked.ai" target="_blank" rel="noopener noreferrer">Booked AI</a>.</p>
+
+<p>We’re seeing a product trend that may be useful for your AI coverage: engagement and conversion are not the same metric.</p>
 
 <p>Booked launched chat-first. Users interacted heavily, but booking completion lagged. We shifted to one-shot intent capture via a Google-style search input, with AI still behind the scenes, followed by a structured booking flow.</p>
 
@@ -101,9 +105,9 @@ def build_body(greet, signature_html, variant='tech'):
 
     return f'''<p>{greet}</p>
 
-{opener}
-{middle}
+{body}
 <p>Kind regards,</p>
+<p>Mennan</p>
 
 <br/><br/>{signature_html}'''
 
