@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-24T05:10:04.538796",
+  "updatedAt": "2026-02-24T05:17:30.218013",
   "contacts": [
     {
       "name": "Unknown",
@@ -235,11 +235,11 @@
       "role": "",
       "email": "erin@theinformation.com",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T18:13:30Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
@@ -247,11 +247,11 @@
       "role": "",
       "email": "events@entrepreneur.com",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T18:17:24Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
