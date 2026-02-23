@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-24T00:20:05.110809",
+  "updatedAt": "2026-02-24T00:23:32.679497",
   "contacts": [
     {
       "name": "Unknown",
@@ -67,11 +67,11 @@
       "role": "",
       "email": "akash@theinformation.com",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T13:22:06Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
@@ -79,11 +79,11 @@
       "role": "",
       "email": "amir@theinformation.com",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T13:23:31Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
