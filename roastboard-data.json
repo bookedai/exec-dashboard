@@ -141,6 +141,12 @@
       "type": "cron",
       "mention": true,
       "message": "Scheduled cron roast event."
+    },
+    {
+      "time": "2026-02-23 14:29",
+      "type": "cron",
+      "mention": true,
+      "message": "Scheduled cron roast event."
     }
   ]
 }
