@@ -9,8 +9,10 @@ import requests
 OPENCLAW_CFG = Path('/Users/mennanyelkenci/.openclaw/openclaw.json')
 OUTREACH_DATA = Path('/Users/mennanyelkenci/.openclaw/workspace/booked-dashboard/outreach-data.json')
 SIG_PATH = Path('/Users/mennanyelkenci/.openclaw/workspace/templates/mennan-signature.html')
+STATE_PATH = Path('/Users/mennanyelkenci/.openclaw/workspace/booked-dashboard/.outreach-send-state.json')
 
 SUBJECT = 'Coverage opportunity - a contrarian AI conversion story - Booked AI'
+WINDOW_SECONDS = 11 * 60
 
 
 def load_env():
@@ -136,9 +138,30 @@ def send_email(token, sender, to_email, cc_email, subject, body_html):
     return r.status_code, r.text[:300]
 
 
+def load_state():
+    if STATE_PATH.exists():
+        try:
+            return json.loads(STATE_PATH.read_text())
+        except Exception:
+            pass
+    return {'last_batch_ts': 0}
+
+
+def save_state(state):
+    STATE_PATH.write_text(json.dumps(state, indent=2))
+
+
 def main():
     if not OUTREACH_DATA.exists():
         raise SystemExit('outreach-data.json not found')
+
+    now = int(time.time())
+    state = load_state()
+    last_ts = int(state.get('last_batch_ts', 0) or 0)
+    if now - last_ts < WINDOW_SECONDS:
+        wait_left = WINDOW_SECONDS - (now - last_ts)
+        print(f'sent_count=0 reason=throttled wait_seconds={wait_left}')
+        return
 
     env = load_env()
     missing = [k for k, v in env.items() if not v]
@@ -179,6 +202,12 @@ def main():
 
     data['updatedAt'] = time.strftime('%Y-%m-%dT%H:%M:%S')
     OUTREACH_DATA.write_text(json.dumps(data, indent=2))
+
+    # update throttle timestamp only when we actually send
+    if sent_count > 0:
+        state['last_batch_ts'] = int(time.time())
+        save_state(state)
+
     print(f'sent_count={sent_count}')
 
 
