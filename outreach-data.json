@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-24T07:30:05.336771",
+  "updatedAt": "2026-02-24T07:36:16.214827",
   "contacts": [
     {
       "name": "Unknown",
@@ -571,11 +571,11 @@
       "role": "",
       "email": "tips@nbcuni.com",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T20:33:04Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
@@ -595,11 +595,11 @@
       "role": "",
       "email": "tony.davis@afr.com.au",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T20:36:09Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     }
   ]
 }
