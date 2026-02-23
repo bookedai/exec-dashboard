@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-24T07:20:05.939940",
+  "updatedAt": "2026-02-24T07:25:41.366123",
   "contacts": [
     {
       "name": "Unknown",
@@ -547,11 +547,11 @@
       "role": "",
       "email": "tips@cnn.com",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Replied",
       "delivered": false,
-      "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "replied": true,
+      "lastTouch": "2026-02-23T20:23:59Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI | Reply: Automatic reply: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
@@ -559,11 +559,11 @@
       "role": "",
       "email": "tips@latimes.com",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T20:25:34Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
