@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-24T06:10:04.302835",
+  "updatedAt": "2026-02-24T06:14:22.176200",
   "contacts": [
     {
       "name": "Unknown",
@@ -379,11 +379,11 @@
       "role": "",
       "email": "mbleby@afr.com",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T19:11:05Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
@@ -391,11 +391,11 @@
       "role": "",
       "email": "news@smartcompany.com.au",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T19:14:14Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
