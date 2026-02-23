@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-24T00:55:30.523449",
+  "updatedAt": "2026-02-24T01:01:40.608734",
   "contacts": [
     {
       "name": "Unknown",
@@ -115,11 +115,11 @@
       "role": "",
       "email": "bizdev@entrepreneur.com",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T13:59:19Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
@@ -127,11 +127,11 @@
       "role": "",
       "email": "business.information@theguardian.com",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-24T01:01:38",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
