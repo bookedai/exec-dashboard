@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-24T02:04:27.062806",
+  "updatedAt": "2026-02-24T02:56:21.416677",
   "contacts": [
     {
       "name": "Unknown",
@@ -178,8 +178,8 @@
       "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "2026-02-24T02:04:24",
-      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI"
+      "lastTouch": "2026-02-23T15:04:24Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
