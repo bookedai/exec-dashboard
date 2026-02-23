@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-24T05:20:04.675719",
+  "updatedAt": "2026-02-24T05:25:01.198495",
   "contacts": [
     {
       "name": "Unknown",
@@ -259,11 +259,11 @@
       "role": "",
       "email": "hannah.tattersall@afr.com",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T18:22:05Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
@@ -271,11 +271,11 @@
       "role": "",
       "email": "help@ft.com",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T18:24:55Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
