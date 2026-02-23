@@ -12,7 +12,7 @@ SIG_PATH = Path('/Users/mennanyelkenci/.openclaw/workspace/templates/mennan-sign
 STATE_PATH = Path('/Users/mennanyelkenci/.openclaw/workspace/booked-dashboard/.outreach-send-state.json')
 
 SUBJECT = 'Coverage opportunity - a contrarian AI conversion story - Booked AI'
-WINDOW_SECONDS = 11 * 60
+WINDOW_SECONDS = 0
 
 
 def load_env():
