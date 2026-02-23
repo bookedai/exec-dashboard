@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-24T06:50:05.668708",
+  "updatedAt": "2026-02-24T06:57:28.480934",
   "contacts": [
     {
       "name": "Unknown",
@@ -475,11 +475,11 @@
       "role": "",
       "email": "press@traveldailymedia.com",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T19:55:05Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
@@ -487,11 +487,11 @@
       "role": "",
       "email": "pressinquiries@entrepreneur.com",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T19:57:22Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
