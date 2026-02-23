@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-24T07:10:07.522110",
+  "updatedAt": "2026-02-24T07:12:47.478632",
   "contacts": [
     {
       "name": "Unknown",
@@ -523,11 +523,11 @@
       "role": "",
       "email": "spatten@afr.com",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T20:11:04Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
@@ -535,11 +535,11 @@
       "role": "",
       "email": "tips2@bloomberg.net",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T20:12:43Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
