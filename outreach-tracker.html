@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Booked AI - Media Outreach Tracker</title>
+  <style>
+    :root{--bg:#f4f7ff;--card:#ffffffcc;--text:#0f172a;--muted:#475569;--line:#dbe3f4;--ok:#059669;--warn:#d97706;--bad:#dc2626;--blue:#2563eb}
+    @media (prefers-color-scheme: dark){
+      :root{--bg:#0b1324;--card:#111a2dcc;--text:#e2e8f0;--muted:#94a3b8;--line:#24344f;--ok:#34d399;--warn:#fbbf24;--bad:#f87171;--blue:#60a5fa}
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Arial;background:var(--bg);color:var(--text);padding:20px}
+    .wrap{max-width:1200px;margin:0 auto}
+    .card{background:var(--card);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:14px;padding:14px}
+    h1{margin:0 0 6px}
+    .muted{color:var(--muted)}
+    .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:12px 0}
+    .stat .k{font-size:12px;color:var(--muted)}
+    .stat .v{font-size:24px;font-weight:700}
+    table{width:100%;border-collapse:collapse;font-size:14px}
+    th,td{padding:8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+    th{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+    input,select{width:100%;padding:6px;border:1px solid var(--line);border-radius:8px;background:transparent;color:var(--text)}
+    .toolbar{display:flex;gap:8px;align-items:center;margin:10px 0}
+    .btn{padding:8px 10px;border:1px solid var(--line);background:transparent;border-radius:10px;color:var(--text);cursor:pointer}
+    .pill{padding:2px 8px;border-radius:999px;font-size:12px;border:1px solid var(--line)}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <h1>Media Outreach Tracker</h1>
+    <div class="muted">Simple journal outreach dashboard - who we contacted, delivery, replies, and status.</div>
+
+    <div class="stats">
+      <div class="card stat"><div class="k">Total</div><div class="v" id="sTotal">0</div></div>
+      <div class="card stat"><div class="k">Sent</div><div class="v" id="sSent">0</div></div>
+      <div class="card stat"><div class="k">Delivered</div><div class="v" id="sDelivered">0</div></div>
+      <div class="card stat"><div class="k">Replies</div><div class="v" id="sReplies">0</div></div>
+      <div class="card stat"><div class="k">Coverage Won</div><div class="v" id="sWon">0</div></div>
+    </div>
+
+    <div class="toolbar">
+      <input id="search" placeholder="Search name / company / email" />
+      <button class="btn" id="saveBtn">Save Local Changes</button>
+      <button class="btn" id="exportBtn">Export JSON</button>
+      <span class="pill" id="countPill">0 visible</span>
+    </div>
+
+    <div style="overflow:auto; max-height:68vh;">
+      <table id="tbl">
+        <thead>
+          <tr>
+            <th>Name</th><th>Company</th><th>Email</th><th>Status</th><th>Delivered</th><th>Replied</th><th>Last Touch</th><th>Notes</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+let contacts=[];
+const key='booked.outreach.tracker.v1';
+
+async function load(){
+  const base=await fetch('./outreach-data.json').then(r=>r.json());
+  const local=JSON.parse(localStorage.getItem(key)||'{}');
+  contacts=(base.contacts||[]).map(c=>({ ...c, ...(local[c.email]||{}) }));
+  render();
+}
+
+function filtered(){
+  const q=document.getElementById('search').value.toLowerCase().trim();
+  if(!q) return contacts;
+  return contacts.filter(c=>[c.name,c.company,c.email,c.status,c.notes].join(' ').toLowerCase().includes(q));
+}
+
+function render(){
+  const rows=filtered();
+  document.getElementById('countPill').textContent=`${rows.length} visible`;
+
+  const tbody=document.querySelector('#tbl tbody');
+  tbody.innerHTML='';
+  rows.forEach((c,idx)=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`
+      <td>${c.name||''}</td>
+      <td>${c.company||''}</td>
+      <td><a href="mailto:${c.email}">${c.email||''}</a></td>
+      <td>
+        <select data-k="status" data-i="${idx}">
+          ${['Not sent','Drafted','Sent','Delivered','Replied','Coverage won','No response'].map(s=>`<option ${c.status===s?'selected':''}>${s}</option>`).join('')}
+        </select>
+      </td>
+      <td><input type="checkbox" data-k="delivered" data-i="${idx}" ${c.delivered?'checked':''}></td>
+      <td><input type="checkbox" data-k="replied" data-i="${idx}" ${c.replied?'checked':''}></td>
+      <td><input data-k="lastTouch" data-i="${idx}" value="${c.lastTouch||''}" placeholder="YYYY-MM-DD"></td>
+      <td><input data-k="notes" data-i="${idx}" value="${(c.notes||'').replace(/"/g,'&quot;')}" placeholder="note"></td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  wireInputs(rows);
+  stats();
+}
+
+function wireInputs(rows){
+  document.querySelectorAll('#tbl [data-k]').forEach(el=>{
+    el.onchange=()=>{
+      const i=+el.dataset.i; const k=el.dataset.k;
+      const row=rows[i];
+      const c=contacts.find(x=>x.email===row.email);
+      c[k]=el.type==='checkbox'?el.checked:el.value;
+      stats();
+    };
+  });
+}
+
+function stats(){
+  const total=contacts.length;
+  const sent=contacts.filter(c=>['Sent','Delivered','Replied','Coverage won'].includes(c.status)).length;
+  const delivered=contacts.filter(c=>c.delivered||c.status==='Delivered'||c.status==='Replied'||c.status==='Coverage won').length;
+  const replies=contacts.filter(c=>c.replied||c.status==='Replied'||c.status==='Coverage won').length;
+  const won=contacts.filter(c=>c.status==='Coverage won').length;
+  sTotal.textContent=total; sSent.textContent=sent; sDelivered.textContent=delivered; sReplies.textContent=replies; sWon.textContent=won;
+}
+
+function saveLocal(){
+  const obj={}; contacts.forEach(c=>{obj[c.email]={status:c.status,delivered:!!c.delivered,replied:!!c.replied,lastTouch:c.lastTouch||'',notes:c.notes||''};});
+  localStorage.setItem(key,JSON.stringify(obj));
+  alert('Saved locally in browser');
+}
+
+function exportJson(){
+  const blob=new Blob([JSON.stringify({contacts},null,2)],{type:'application/json'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='outreach-tracker-export.json'; a.click();
+}
+
+document.getElementById('search').addEventListener('input',render);
+document.getElementById('saveBtn').addEventListener('click',saveLocal);
+document.getElementById('exportBtn').addEventListener('click',exportJson);
+load();
+</script>
+</body>
+</html>
