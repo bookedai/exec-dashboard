@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-24T05:30:05.910384",
+  "updatedAt": "2026-02-24T05:35:05.676942",
   "contacts": [
     {
       "name": "Unknown",
@@ -283,11 +283,11 @@
       "role": "",
       "email": "info@channelnews.com.au",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T18:33:05Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
@@ -295,11 +295,11 @@
       "role": "",
       "email": "info@saastrinc.com",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T18:35:00Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
