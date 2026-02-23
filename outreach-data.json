@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-24T06:30:05.595345",
+  "updatedAt": "2026-02-24T06:35:36.147606",
   "contacts": [
     {
       "name": "Unknown",
@@ -427,11 +427,11 @@
       "role": "",
       "email": "nlenaghan@afr.com",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T19:33:04Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
@@ -439,11 +439,11 @@
       "role": "",
       "email": "pdurkin@afr.com",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T19:35:29Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
