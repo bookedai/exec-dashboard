@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-24T05:40:04.613846",
+  "updatedAt": "2026-02-24T05:45:27.119275",
   "contacts": [
     {
       "name": "Unknown",
@@ -307,11 +307,11 @@
       "role": "",
       "email": "investigations@theage.com.au",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T18:44:05Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
@@ -319,11 +319,11 @@
       "role": "",
       "email": "kchedraoui@cnet.com",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T18:45:21Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
