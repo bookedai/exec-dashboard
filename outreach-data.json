@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-24T06:00:04.893325",
+  "updatedAt": "2026-02-24T06:04:43.597329",
   "contacts": [
     {
       "name": "Unknown",
@@ -355,11 +355,11 @@
       "role": "",
       "email": "marketing@saastrinc.com",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T19:00:20Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
@@ -367,11 +367,11 @@
       "role": "",
       "email": "max.mason@afr.com",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T19:04:36Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
