@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-23T23:59:20.884382",
+  "updatedAt": "2026-02-24T00:10:15.217986",
   "contacts": [
     {
       "name": "Unknown",
@@ -7,11 +7,11 @@
       "role": "",
       "email": "Amy.Marcus@theinformation.com",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T13:05:40Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
@@ -19,11 +19,11 @@
       "role": "",
       "email": "Christian.Guyton@futurenet.com",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T13:08:42Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
