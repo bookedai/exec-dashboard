@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-24T00:33:06.933282",
+  "updatedAt": "2026-02-24T00:40:11.452311",
   "contacts": [
     {
       "name": "Unknown",
@@ -91,11 +91,11 @@
       "role": "",
       "email": "amy@theinformation.com",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T13:39:55Z",
+      "notes": "Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
