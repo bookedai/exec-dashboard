@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-24T02:56:21.416677",
+  "updatedAt": "2026-02-24T03:08:49.099577",
   "contacts": [
     {
       "name": "Unknown",
@@ -187,11 +187,11 @@
       "role": "",
       "email": "editorial@digitaltrends.com",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-23T16:04:54Z",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI | Sent: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
@@ -199,11 +199,11 @@
       "role": "",
       "email": "editorial@siliconrepublic.com",
       "contactMethod": "Email",
-      "status": "Not sent",
+      "status": "Sent",
       "delivered": false,
       "replied": false,
-      "lastTouch": "",
-      "notes": ""
+      "lastTouch": "2026-02-24T03:08:46",
+      "notes": "Sent batch subject: Coverage opportunity - a contrarian AI conversion story - Booked AI"
     },
     {
       "name": "Unknown",
