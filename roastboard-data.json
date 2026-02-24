@@ -213,6 +213,12 @@
       "type": "cron",
       "mention": true,
       "message": "Scheduled cron roast update."
+    },
+    {
+      "timestamp": "2026-02-24T14:29:06.033784+11:00",
+      "type": "cron",
+      "mention": true,
+      "message": "Automated cron roast check-in."
     }
   ]
 }
