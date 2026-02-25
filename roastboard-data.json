@@ -11,241 +11,241 @@
   },
   "entries": [
     {
-      "time": "2026-02-22 09:54",
+      "timestamp": "2026-02-22T09:54:00+11:00",
       "type": "manual",
       "mention": false,
       "message": "Morning roast sent in dev channel"
     },
     {
-      "time": "2026-02-22 18:31",
+      "timestamp": "2026-02-22T18:31:00+11:00",
       "type": "manual",
       "mention": false,
       "message": "Follow-up roast for non-response"
     },
     {
-      "time": "2026-02-22 19:28",
+      "timestamp": "2026-02-22T19:28:00+11:00",
       "type": "cron",
       "mention": false,
       "message": "Hourly roast job execution"
     },
     {
-      "time": "2026-02-22 19:29",
+      "timestamp": "2026-02-22T19:29:00+11:00",
       "type": "manual",
       "mention": true,
       "message": "@daryl mention test and roast"
     },
     {
-      "time": "2026-02-22 19:58",
+      "timestamp": "2026-02-22T19:58:00+11:00",
       "type": "cron",
       "mention": true,
       "message": "Half-hour cron roast with real Slack user mention"
     },
     {
-      "time": "2026-02-22 21:59",
+      "timestamp": "2026-02-22T21:59:00+11:00",
       "type": "cron",
       "mention": true,
       "message": "Scheduled cron roast event."
     },
     {
-      "time": "2026-02-22 22:29",
+      "timestamp": "2026-02-22T22:29:00+11:00",
       "type": "cron",
       "mention": true,
       "message": "Scheduled cron roast event."
     },
     {
-      "time": "2026-02-22 22:59",
+      "timestamp": "2026-02-22T22:59:00+11:00",
       "type": "cron",
       "mention": true,
       "message": "Scheduled cron roast event."
     },
     {
-      "time": "2026-02-22 23:29",
+      "timestamp": "2026-02-22T23:29:00+11:00",
       "type": "cron",
       "mention": true,
       "message": "Scheduled cron roast event."
     },
     {
-      "time": "2026-02-22 23:59",
+      "timestamp": "2026-02-22T23:59:00+11:00",
       "type": "cron",
       "mention": true,
       "message": "Scheduled cron roast event."
     },
     {
-      "time": "2026-02-23 00:59",
+      "timestamp": "2026-02-23T00:59:00+11:00",
       "type": "cron",
       "mention": true,
       "message": "Scheduled cron roast event."
     },
     {
-      "time": "2026-02-23 01:59",
+      "timestamp": "2026-02-23T01:59:00+11:00",
       "type": "cron",
       "mention": true,
       "message": "Scheduled cron roast event."
     },
     {
-      "time": "2026-02-23 03:00",
+      "timestamp": "2026-02-23T03:00:00+11:00",
       "type": "cron",
       "mention": true,
       "message": "Scheduled cron roast event."
     },
     {
-      "time": "2026-02-23 04:00",
+      "timestamp": "2026-02-23T04:00:00+11:00",
       "type": "cron",
       "mention": true,
       "message": "Scheduled cron roast event."
     },
     {
-      "time": "2026-02-23 05:01",
+      "timestamp": "2026-02-23T05:01:00+11:00",
       "type": "cron",
       "mention": true,
       "message": "Scheduled cron roast event."
     },
     {
-      "time": "2026-02-23 06:02",
+      "timestamp": "2026-02-23T06:02:00+11:00",
       "type": "cron",
       "mention": true,
       "message": "Scheduled cron roast event."
     },
     {
-      "time": "2026-02-23 07:02",
+      "timestamp": "2026-02-23T07:02:00+11:00",
       "type": "cron",
       "mention": true,
       "message": "Scheduled cron roast event."
     },
     {
-      "time": "2026-02-23 08:02",
+      "timestamp": "2026-02-23T08:02:00+11:00",
       "type": "cron",
       "mention": true,
       "message": "Scheduled cron roast event."
     },
     {
-      "time": "2026-02-23 08:29",
+      "timestamp": "2026-02-23T08:29:00+11:00",
       "type": "cron",
       "mention": true,
       "message": "Scheduled cron roast event."
     },
     {
-      "time": "2026-02-23 08:59",
+      "timestamp": "2026-02-23T08:59:00+11:00",
       "type": "cron",
       "mention": true,
       "message": "Scheduled cron roast event."
     },
     {
-      "time": "2026-02-23 10:29",
+      "timestamp": "2026-02-23T10:29:00+11:00",
       "type": "cron",
       "mention": true,
       "message": "Scheduled cron roast event."
     },
     {
-      "time": "2026-02-23 12:29",
+      "timestamp": "2026-02-23T12:29:00+11:00",
       "type": "cron",
       "mention": true,
       "message": "Scheduled cron roast event."
     },
     {
-      "time": "2026-02-23 14:29",
+      "timestamp": "2026-02-23T14:29:00+11:00",
       "type": "cron",
       "mention": true,
       "message": "Scheduled cron roast event."
     },
     {
-      "time": "2026-02-23 16:29",
+      "timestamp": "2026-02-23T16:29:00+11:00",
       "type": "cron",
       "mention": true,
       "message": "Scheduled cron roast event."
     },
     {
-      "time": "2026-02-23 18:29",
+      "timestamp": "2026-02-23T18:29:00+11:00",
       "type": "cron",
       "mention": true,
       "message": "Scheduled cron roast event."
     },
     {
-      "time": "2026-02-23 20:29",
+      "timestamp": "2026-02-23T20:29:00+11:00",
       "type": "cron",
       "mention": true,
       "message": "Scheduled cron roast event."
     },
     {
-      "time": "2026-02-23 22:29",
+      "timestamp": "2026-02-23T22:29:00+11:00",
       "type": "cron",
       "mention": true,
       "message": "Scheduled cron roast event."
     },
     {
-      "time": "2026-02-24 00:29",
+      "timestamp": "2026-02-24T00:29:00+11:00",
       "type": "cron",
       "mention": true,
       "message": "Scheduled cron roast event."
     },
     {
-      "time": "2026-02-24 02:29",
+      "timestamp": "2026-02-24T02:29:00+11:00",
       "type": "cron",
       "mention": true,
       "message": "Scheduled cron roast event."
     },
     {
-      "timestamp": "2026-02-24T04:29:09.099832+11:00",
+      "timestamp": "2026-02-24T04:29:09+11:00",
       "type": "cron",
       "mention": true,
       "message": "Automated cron roast check-in."
     },
     {
-      "timestamp": "2026-02-24T06:29:06.232838+11:00",
+      "timestamp": "2026-02-24T06:29:06+11:00",
       "type": "cron",
       "mention": true,
       "message": "Scheduled cron roast update."
     },
     {
-      "timestamp": "2026-02-24T08:29:06.216649+11:00",
+      "timestamp": "2026-02-24T08:29:06+11:00",
       "type": "cron",
       "mention": true,
       "message": "Routine cron roast event."
     },
     {
-      "timestamp": "2026-02-24T10:29:05.590850+11:00",
+      "timestamp": "2026-02-24T10:29:05+11:00",
       "type": "cron",
       "mention": true,
       "message": "Automated cron roast ping."
     },
     {
-      "timestamp": "2026-02-24T12:29:05.816853+11:00",
+      "timestamp": "2026-02-24T12:29:05+11:00",
       "type": "cron",
       "mention": true,
       "message": "Scheduled cron roast update."
     },
     {
-      "timestamp": "2026-02-24T14:29:06.033784+11:00",
+      "timestamp": "2026-02-24T14:29:06+11:00",
       "type": "cron",
       "mention": true,
       "message": "Automated cron roast check-in."
     },
     {
-      "timestamp": "2026-02-24T19:40:48.205394+11:00",
+      "timestamp": "2026-02-24T19:40:48+11:00",
       "type": "cron",
       "mention": true,
       "message": "Scheduled cron roast event."
     },
     {
-      "timestamp": "2026-02-24T20:29:06.748966+11:00",
+      "timestamp": "2026-02-24T20:29:06+11:00",
       "type": "cron",
       "mention": true,
       "message": "Automated cron roast update."
     },
     {
-      "timestamp": "2026-02-24T22:29:06.859116+11:00",
+      "timestamp": "2026-02-24T22:29:06+11:00",
       "type": "cron",
       "mention": true,
       "message": "Scheduled cron roast update."
     },
     {
-      "timestamp": "2026-02-25T00:29:06.815548+11:00",
+      "timestamp": "2026-02-25T00:29:06+11:00",
       "type": "cron",
       "mention": true,
       "message": "Automated cron roast check-in."
     },
     {
-      "timestamp": "2026-02-25T02:29:08.187529+11:00",
+      "timestamp": "2026-02-25T02:29:08+11:00",
       "type": "cron",
       "mention": true,
       "message": "Scheduled cron roast event."
@@ -327,6 +327,12 @@
       "type": "cron",
       "mention": true,
       "message": "Automated cron roast check."
+    },
+    {
+      "timestamp": "2026-02-26T06:29:00+11:00",
+      "type": "cron",
+      "mention": true,
+      "message": "Scheduled cron roast event."
     }
   ]
 }
